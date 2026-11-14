@@ -1,0 +1,54 @@
+{
+  "original_size": "Physical size: 1080x2400",
+  "original_density": "Physical density: 420",
+  "original_font_scale": "1.0",
+  "launch": "Starting: Intent { cmp=com.example.studyflowapp/.MainActivity }\r\nStatus: ok\r\nLaunchState: UNKNOWN (0)\r\nActivity: com.example.studyflowapp/.MainActivity\r\nWaitTime: 1156\r\nComplete",
+  "forward_navigation": true,
+  "reference_bounds_dp": {
+    "onboarding_hero": [
+      24.0,
+      116.0,
+      366.0,
+      448.0
+    ],
+    "onboarding_badge": [
+      24.0,
+      474.0,
+      232.0,
+      496.0
+    ],
+    "onboarding_title": [
+      24.0,
+      509.0,
+      366.0,
+      547.67
+    ],
+    "onboarding_description": [
+      24.0,
+      559.67,
+      366.0,
+      601.67
+    ],
+    "onboarding_pagination": [
+      169.0,
+      631.67,
+      221.0,
+      638.67
+    ],
+    "onboarding_get_started": [
+      24.0,
+      660.67,
+      366.0,
+      712.67
+    ]
+  },
+  "last_page_cta_feedback_only": true,
+  "back_navigation": true,
+  "forward_after_back": true,
+  "small_screen_actions_reachable": true,
+  "settings_restored": {
+    "size": true,
+    "density": true,
+    "font_scale": true
+  }
+}

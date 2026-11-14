@@ -1,0 +1,6 @@
+{
+  "both_fields_empty": true,
+  "email_keyboard_opens_and_reopens": true,
+  "password_keyboard_and_toggle": true,
+  "keyboard_after_reentry": true
+}

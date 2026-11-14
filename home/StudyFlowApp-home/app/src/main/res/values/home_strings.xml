@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_date">MONDAY, OCTOBER 5</string>
+    <string name="home_greeting">Hi, Aruzhan ✦</string>
+    <string name="home_subtitle">Let’s make today a little lighter.</string>
+    <string name="home_week">YOUR LAST 7 DAYS</string>
+    <string name="home_momentum">Great momentum.</string>
+    <string name="home_hours">9 of 12 focused hours</string>
+    <string name="home_percent">75%</string>
+    <string name="home_done">6 / 10 tasks done</string>
+    <string name="home_streak">✦ 5-day streak</string>
+    <string name="home_next_deadline">NEXT DEADLINE</string>
+    <string name="home_problem">Problem set 04</string>
+    <string name="home_due">Calculus II · Tue, 18:00</string>
+    <string name="home_countdown">1d 7h</string>
+    <string name="home_remaining">36m remaining</string>
+    <string name="home_priorities">Your priorities</string>
+    <string name="home_see_all">See all</string>
+    <string name="home_problem_detail">Calculus II · 1d 7h left</string>
+    <string name="home_high">High</string>
+    <string name="home_diagram">ER diagram project</string>
+    <string name="home_diagram_detail">Database Systems · 2d 13h left</string>
+    <string name="home_medium">Medium</string>
+    <string name="home_classes">Today’s classes</string>
+    <string name="home_class_count">4 classes</string>
+    <string name="home_start">10:00</string>
+    <string name="home_end">11:20</string>
+    <string name="home_calculus">Calculus II</string>
+    <string name="home_room">B-204 · In class now</string>
+    <string name="home_up_next">Up next · 13:00 Physics II · Lab C-112</string>
+    <string name="home_nav_home">Home</string>
+    <string name="home_nav_schedule">Schedule</string>
+    <string name="home_nav_tasks">Tasks</string>
+    <string name="home_nav_notes">Notes</string>
+    <string name="home_nav_profile">Profile</string>
+    <string name="home_notifications">Notifications</string>
+    <string name="home_add">Add</string>
+    <string name="home_check_problem">Mark Problem set 04 as completed</string>
+    <string name="home_check_diagram">Mark ER diagram project as completed</string>
+    <string name="home_progress_description">Weekly focus progress: 75 percent, 9 of 12 hours</string>
+</resources>

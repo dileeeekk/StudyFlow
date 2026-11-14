@@ -1,0 +1,5 @@
+{
+  "login_fields_whitespace_password_boundary_and_remember_removed": true,
+  "register_every_required_field_whitespace_password_and_agreement": true,
+  "test_values_cleared": true
+}

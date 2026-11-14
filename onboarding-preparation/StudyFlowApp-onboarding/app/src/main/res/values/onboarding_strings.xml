@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_deadline_title">Your next deadline, handled</string>
+    <string name="onboarding_deadline_detail">Calculus II · Problem set 04</string>
+    <string name="onboarding_badge">01 / YOUR ACADEMIC LIFE, SIMPLIFIED</string>
+    <string name="onboarding_title">Track Every Deadline</string>
+    <string name="onboarding_description">Bring assignments, exams and projects together.\nKnow what’s next before it becomes urgent.</string>
+    <string name="onboarding_get_started">Get Started</string>
+    <string name="onboarding_account_prompt">"Already have an account? "</string>
+    <string name="onboarding_login">Log In</string>
+</resources>

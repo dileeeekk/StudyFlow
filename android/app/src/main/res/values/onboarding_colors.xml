@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="studyflow_ink">#172443</color>
+    <color name="studyflow_muted">#66728B</color>
+    <color name="studyflow_primary">#4564ED</color>
+    <color name="studyflow_outline">#E5EAF3</color>
+    <color name="studyflow_badge_background">#EDF1FF</color>
+</resources>

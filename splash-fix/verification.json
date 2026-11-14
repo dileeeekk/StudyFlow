@@ -1,0 +1,9 @@
+{
+  "launch": "Starting: Intent { cmp=com.example.studyflowapp/.MainActivity }\r\nStatus: ok\r\nLaunchState: COLD\r\nActivity: com.example.studyflowapp/.MainActivity\r\nTotalTime: 1891\r\nWaitTime: 1898\r\nComplete\r\n",
+  "first_capture_after_launch_s": 0.512,
+  "second_capture_after_launch_s": 1.096,
+  "resumed": [
+    "topResumedActivity=ActivityRecord{3794757 u0 com.example.studyflowapp/.OnboardingActivity t36}",
+    "ResumedActivity: ActivityRecord{3794757 u0 com.example.studyflowapp/.OnboardingActivity t36}"
+  ]
+}

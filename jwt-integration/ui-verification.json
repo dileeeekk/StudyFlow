@@ -1,0 +1,8 @@
+{
+  "registration_from_ui_and_real_name": true,
+  "session_survives_process_restart": true,
+  "profile_logout_and_empty_login": true,
+  "wrong_password_does_not_open_home": true,
+  "real_login_from_ui": true,
+  "test_session_signed_out": true
+}

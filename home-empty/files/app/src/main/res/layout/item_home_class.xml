@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:baselineAligned="false" android:id="@+id/home_class_card" android:minHeight="66dp" android:gravity="center_vertical" android:paddingStart="14dp" android:paddingEnd="14dp" android:paddingTop="14dp" android:paddingBottom="14dp" android:layout_marginTop="12dp" android:background="@drawable/bg_home_class">
+  <LinearLayout android:layout_width="62dp" android:layout_height="wrap_content" android:orientation="vertical">
+    <androidx.appcompat.widget.AppCompatTextView android:id="@+id/home_start" style="@style/StudyFlow.Home.Text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="13sp" android:fontFamily="@font/inter_bold" android:textColor="@color/studyflow_primary" tools:text="@string/home_start" />
+    <androidx.appcompat.widget.AppCompatTextView android:id="@+id/home_end" style="@style/StudyFlow.Home.Text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="10sp" android:fontFamily="@font/inter_regular" android:textColor="@color/studyflow_muted" android:layout_marginTop="7dp" tools:text="@string/home_end" />
+  </LinearLayout>
+  <View android:layout_width="3dp" android:layout_height="38dp" android:layout_marginEnd="12dp" android:background="@drawable/bg_home_divider" android:importantForAccessibility="no" />
+  <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:orientation="vertical" android:layout_weight="1" android:layout_marginEnd="8dp">
+    <androidx.appcompat.widget.AppCompatTextView android:id="@+id/home_calculus" style="@style/StudyFlow.Home.Text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="13sp" android:fontFamily="@font/inter_semibold" android:textColor="@color/studyflow_ink" tools:text="@string/home_calculus" />
+    <androidx.appcompat.widget.AppCompatTextView android:id="@+id/home_room" style="@style/StudyFlow.Home.Text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="11sp" android:fontFamily="@font/inter_regular" android:textColor="@color/studyflow_muted" android:layout_marginTop="7dp" tools:text="@string/home_room" />
+  </LinearLayout>
+  <androidx.appcompat.widget.AppCompatImageView android:layout_width="19dp" android:layout_height="19dp" android:src="@drawable/ic_home_broadcast" android:importantForAccessibility="no" />
+</LinearLayout>
+            

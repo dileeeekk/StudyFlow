@@ -1,0 +1,5 @@
+exec(__import__('pathlib').Path(__file__).with_name('verify.py').read_text(encoding='utf-8').split('results={}')[0])
+tree=ui('current')
+if any(n.get('resource-id','').endswith('/onboarding_login') for n in tree.iter('node')):tap(tree,'onboarding_login')
+tap(ui('current-login'),'login_email');shot('Email-keyboard');keyboard('email-latest')
+print('Email captured with hardware keyboard setting enabled.',flush=True)

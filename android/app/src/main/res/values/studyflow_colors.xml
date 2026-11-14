@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="studyflow_blue_start">#273D86</color>
+    <color name="studyflow_blue_middle">#4969E8</color>
+    <color name="studyflow_lilac_end">#9672D6</color>
+    <color name="studyflow_white">#FFFFFF</color>
+    <color name="studyflow_subtitle">#E5FFFFFF</color>
+    <color name="studyflow_tagline">#BBFFFFFF</color>
+</resources>

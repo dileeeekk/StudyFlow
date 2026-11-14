@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.StudyFlowApp.Home" parent="Theme.StudyFlowApp.Onboarding">
+        <item name="android:windowBackground">@color/studyflow_register_background</item>
+    </style>
+    <style name="StudyFlow.Home.Text" parent="StudyFlow.Onboarding.Text">
+    </style>
+</resources>

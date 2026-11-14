@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="onboarding_focus_card_title">A little focus goes a long way</string>
+    <string name="onboarding_focus_card_detail">Weekly focus goal · 9 of 12 hours</string>
+    <string name="onboarding_focus_badge">03 / YOUR ACADEMIC LIFE, SIMPLIFIED</string>
+    <string name="onboarding_focus_title">Make Time Work for\nYou</string>
+    <string name="onboarding_focus_description">Build a study rhythm that fits your life. Turn\nfocused moments into goals you can actually\nreach.</string>
+</resources>

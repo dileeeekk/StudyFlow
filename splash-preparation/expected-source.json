@@ -1,0 +1,19 @@
+{
+  "app/src/main/AndroidManifest.xml": "726ad95ca1730ef93b1471303882ff3bcfd3512acb5b1b70303bd2943980629c",
+  "app/src/main/res/drawable/bg_studyflow_dot.xml": null,
+  "app/src/main/res/drawable/bg_studyflow_splash.xml": null,
+  "app/src/main/res/drawable/ic_studyflow_launch.xml": null,
+  "app/src/main/res/drawable/ic_studyflow_logo.xml": null,
+  "app/src/main/res/drawable/studyflow_logo.xml": null,
+  "app/src/main/res/drawable-xxhdpi/studyflow_logo_shadow.png": null,
+  "app/src/main/res/font/inter_bold.ttf": null,
+  "app/src/main/res/font/inter_medium.ttf": null,
+  "app/src/main/res/font/inter_regular.ttf": null,
+  "app/src/main/res/layout/activity_main.xml": "4edb8f1a46136317c0f7745ebe5157e785132339b16e228c2b4340da66a1d9be",
+  "app/src/main/res/values/studyflow_colors.xml": null,
+  "app/src/main/res/values/studyflow_splash_theme.xml": null,
+  "app/src/main/res/values/studyflow_strings.xml": null,
+  "app/src/main/res/values-v31/studyflow_splash_theme.xml": null,
+  "app/src/main/java/com/example/studyflowapp/MainActivity.kt": "811b886cce6484e399d847c8fadc7875b27b0cf7546f0a92b8077cce7bbfc612",
+  "app/src/main/assets/licenses/inter_ofl.txt": null
+}

@@ -1,0 +1,18 @@
+{
+  "app/src/main/AndroidManifest.xml": "eaa27e3dc68918b03b3dee9713b0e7e2ba901230cdb924cffbfd03b20dc95def",
+  "app/src/main/res/drawable/bg_onboarding_badge.xml": null,
+  "app/src/main/res/drawable/bg_onboarding_deadline.xml": null,
+  "app/src/main/res/drawable/bg_onboarding_hero.xml": null,
+  "app/src/main/res/drawable/bg_onboarding_page_active.xml": null,
+  "app/src/main/res/drawable/bg_onboarding_page_inactive.xml": null,
+  "app/src/main/res/drawable/ic_onboarding_arrow.xml": null,
+  "app/src/main/res/drawable-xxhdpi/onboarding_academic_illustration.png": null,
+  "app/src/main/res/drawable-xxhdpi/onboarding_button_shadow.png": null,
+  "app/src/main/res/font/inter_semibold.ttf": null,
+  "app/src/main/res/layout/activity_onboarding.xml": null,
+  "app/src/main/res/values/onboarding_colors.xml": null,
+  "app/src/main/res/values/onboarding_strings.xml": null,
+  "app/src/main/res/values/onboarding_styles.xml": null,
+  "app/src/main/java/com/example/studyflowapp/MainActivity.kt": "2aac96f8008c399bd682320096a6cc56ead29b0d31292169b5496597b1a0e605",
+  "app/src/main/java/com/example/studyflowapp/OnboardingActivity.kt": null
+}

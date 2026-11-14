@@ -1,0 +1,8 @@
+{
+  "unit_tests": "11 passed",
+  "hosting_smoke_test": "passed",
+  "django_check_deploy": "no issues",
+  "archive_files": 24,
+  "remote_deployment": "pending hosting account",
+  "android_api_address": "unchanged until HTTPS endpoint verified"
+}

@@ -1,0 +1,8 @@
+{
+  "android_files": 14,
+  "existing_android_files_changed": 6,
+  "existing_files_preserved": 117,
+  "backend_source_files": 19,
+  "layouts_unchanged": true,
+  "archive_excludes_secrets_and_database": true
+}

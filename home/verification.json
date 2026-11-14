@@ -1,0 +1,7 @@
+{
+  "login_validation_and_home_transition": true,
+  "temporary_checkbox_feedback": true,
+  "register_validation_and_home_transition": true,
+  "small_screen_scrolling_and_fixed_navigation": true,
+  "emulator_settings_restored": true
+}

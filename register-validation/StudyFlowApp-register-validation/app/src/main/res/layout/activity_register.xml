@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/register_scroll" android:layout_width="match_parent" android:layout_height="match_parent"
+    android:fillViewport="true" android:clipToPadding="true" android:scrollbars="none" android:paddingTop="60dp" android:paddingBottom="34dp">
+    <LinearLayout android:id="@+id/register_content" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:paddingStart="4dp" android:paddingEnd="4dp"
+        android:clipChildren="false" android:clipToPadding="false" android:focusableInTouchMode="true" android:descendantFocusability="beforeDescendants">
+        <LinearLayout android:id="@+id/register_header_row" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="44dp"
+            android:layout_marginStart="20dp" android:layout_marginEnd="20dp" android:orientation="horizontal" android:gravity="center_vertical">
+            <androidx.appcompat.widget.AppCompatImageButton android:id="@+id/register_back" android:layout_width="44dp" android:layout_height="44dp"
+                android:padding="11dp" android:src="@drawable/ic_register_back" android:background="@drawable/bg_register_back" android:contentDescription="@string/register_back" />
+            <androidx.appcompat.widget.AppCompatTextView style="@style/StudyFlow.Login.Text" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                android:layout_marginStart="12dp" android:fontFamily="@font/inter_bold" android:textSize="22sp" android:text="@string/register_header" />
+        </LinearLayout>
+        <androidx.appcompat.widget.AppCompatTextView android:id="@+id/register_title" style="@style/StudyFlow.Login.Text"
+            android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginStart="20dp" android:layout_marginEnd="20dp" android:layout_marginTop="20dp"
+            android:fontFamily="@font/inter_bold" android:textSize="29sp" android:text="@string/register_title" />
+        <androidx.appcompat.widget.AppCompatTextView style="@style/StudyFlow.Login.Text" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginStart="20dp" android:layout_marginEnd="20dp" android:layout_marginTop="8dp" android:paddingTop="2dp" android:paddingBottom="2dp"
+            android:text="@string/register_description" android:textSize="14sp" android:lineSpacingExtra="4sp" android:textColor="@color/studyflow_muted" />
+        <FrameLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="5dp" android:layout_marginBottom="-19dp"
+            android:background="@drawable/register_card_shadow" android:clipChildren="false" android:clipToPadding="false">
+            <LinearLayout android:id="@+id/register_card" android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginStart="20dp" android:layout_marginEnd="20dp" android:layout_marginTop="15dp" android:layout_marginBottom="25dp"
+                android:padding="20dp" android:orientation="vertical" android:background="@drawable/bg_login_card">
+<androidx.appcompat.widget.AppCompatTextView style="@style/StudyFlow.Login.Label"
+        android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="0dp"
+        android:text="@string/register_name_label" android:labelFor="@id/register_name" /><FrameLayout android:layout_width="match_parent" android:layout_height="52dp" android:layout_marginTop="8dp"
+        android:background="@drawable/bg_login_field" android:addStatesFromChildren="true">
+        <androidx.appcompat.widget.AppCompatEditText android:id="@+id/register_name" style="@style/StudyFlow.Login.Input"
+            android:layout_width="match_parent" android:layout_height="match_parent" android:inputType="textPersonName"
+            android:imeOptions="actionNext" android:autofillHints="personName" android:nextFocusForward="@id/register_email" />
+        <ImageView android:layout_width="19dp" android:layout_height="19dp" android:layout_gravity="end|center_vertical"
+        android:layout_marginEnd="14dp" android:src="@drawable/ic_register_person" android:contentDescription="@null" android:importantForAccessibility="no" />
+    </FrameLayout><androidx.appcompat.widget.AppCompatTextView style="@style/StudyFlow.Login.Label"
+        android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp"
+        android:text="@string/register_email_label" android:labelFor="@id/register_email" /><FrameLayout android:layout_width="match_parent" android:layout_height="52dp" android:layout_marginTop="8dp"
+        android:background="@drawable/bg_login_field" android:addStatesFromChildren="true">
+        <androidx.appcompat.widget.AppCompatEditText android:id="@+id/register_email" style="@style/StudyFlow.Login.Input"
+            android:layout_width="match_parent" android:layout_height="match_parent" android:inputType="textEmailAddress"
+            android:imeOptions="actionNext" android:autofillHints="emailAddress" android:nextFocusForward="@id/register_password" />
+        <ImageView android:layout_width="19dp" android:layout_height="19dp" android:layout_gravity="end|center_vertical"
+        android:layout_marginEnd="14dp" android:src="@drawable/ic_login_email" android:contentDescription="@null" android:importantForAccessibility="no" />
+    </FrameLayout><androidx.appcompat.widget.AppCompatTextView style="@style/StudyFlow.Login.Label"
+        android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp"
+        android:text="@string/register_password_label" android:labelFor="@id/register_password" /><FrameLayout android:layout_width="match_parent" android:layout_height="52dp" android:layout_marginTop="8dp"
+        android:background="@drawable/bg_login_field" android:addStatesFromChildren="true">
+        <androidx.appcompat.widget.AppCompatEditText android:id="@+id/register_password" style="@style/StudyFlow.Login.Input"
+            android:layout_width="match_parent" android:layout_height="match_parent" android:inputType="textPassword"
+            android:imeOptions="actionNext" android:nextFocusForward="@id/register_university" android:autofillHints="newPassword" android:saveEnabled="false" />
+        <androidx.appcompat.widget.AppCompatImageButton android:id="@+id/register_password_toggle" android:layout_width="48dp" android:layout_height="match_parent" android:layout_gravity="end"
+        android:background="?attr/selectableItemBackgroundBorderless" android:padding="0dp" android:scaleType="center" android:src="@drawable/ic_login_eye_off" android:contentDescription="@string/login_show_password" />
+    </FrameLayout>
+                <androidx.appcompat.widget.AppCompatTextView style="@style/StudyFlow.Login.Text" android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:id="@+id/register_password_error" android:visibility="invisible" android:accessibilityLiveRegion="polite"
+                    android:layout_marginTop="7dp" android:text="@string/register_password_helper" android:textSize="10sp" android:textColor="@color/studyflow_register_error" />
+<androidx.appcompat.widget.AppCompatTextView style="@style/StudyFlow.Login.Label"
+        android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp"
+        android:text="@string/register_university_label" android:labelFor="@id/register_university" /><androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/register_university"
+                    style="@style/StudyFlow.Login.Input"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_login_field"
+                    android:backgroundTint="@null"
+                    android:paddingEnd="14dp"
+                    android:inputType="textCapWords"
+                    android:imeOptions="actionDone" />
+            </LinearLayout>
+        </FrameLayout>
+        <androidx.appcompat.widget.AppCompatCheckBox android:id="@+id/register_agreement" style="@style/StudyFlow.Login.Text" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="48dp"
+            android:layout_marginStart="20dp" android:layout_marginEnd="20dp" android:button="@null" app:buttonCompat="@null" android:drawableStart="@drawable/register_checkbox" android:drawablePadding="9dp"
+            android:padding="0dp" android:checked="true" android:background="?attr/selectableItemBackgroundBorderless" android:gravity="center_vertical"
+            android:text="@string/register_agreement" android:textSize="11sp" android:textColor="@color/studyflow_muted" />
+        <FrameLayout
+            android:id="@+id/register_button_container"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginStart="20dp" android:layout_marginEnd="20dp"
+            android:clipChildren="false"
+            android:clipToPadding="false">
+
+            <!-- The shadow extends beyond the 52dp button, as in the SVG. -->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="92dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="-20dp"
+                android:layout_marginEnd="-20dp"
+                android:contentDescription="@null"
+                android:importantForAccessibility="no"
+                android:scaleType="fitXY"
+                android:src="@drawable/onboarding_button_shadow"
+                android:translationY="8dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/register_submit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:elevation="0dp"
+                android:fontFamily="@font/inter_semibold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:letterSpacing="0"
+                android:minHeight="52dp"
+                android:minWidth="0dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:stateListAnimator="@null"
+                android:text="@string/register_submit"
+                android:textAllCaps="false"
+                android:textColor="@color/studyflow_white"
+                android:textSize="14sp"
+                app:backgroundTint="@color/studyflow_primary"
+                app:cornerRadius="14dp"
+                app:icon="@drawable/ic_onboarding_arrow"
+                app:iconGravity="textStart"
+                app:iconPadding="12dp"
+                app:iconSize="16dp"
+                app:iconTint="@color/studyflow_white"
+                app:rippleColor="#33FFFFFF"
+                app:strokeColor="@color/studyflow_primary"
+                app:strokeWidth="1dp" />
+        </FrameLayout>
+        <LinearLayout android:id="@+id/register_member_row" android:layout_width="match_parent" android:layout_height="48dp" android:layout_marginTop="5dp"
+            android:layout_marginStart="20dp" android:layout_marginEnd="20dp" android:gravity="center" android:orientation="horizontal">
+            <androidx.appcompat.widget.AppCompatTextView style="@style/StudyFlow.Login.Text" android:layout_width="wrap_content" android:layout_height="match_parent"
+                android:gravity="center_vertical" android:text="@string/register_member" android:textSize="12sp" android:textColor="@color/studyflow_muted" />
+            <androidx.appcompat.widget.AppCompatTextView android:id="@+id/register_login" style="@style/StudyFlow.Login.Text" android:layout_width="wrap_content" android:layout_height="match_parent"
+                android:gravity="center_vertical" android:fontFamily="@font/inter_semibold" android:text="@string/login_submit" android:textSize="12sp" android:textColor="@color/studyflow_primary"
+                android:background="?attr/selectableItemBackgroundBorderless" android:clickable="true" android:focusable="true" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

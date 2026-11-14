@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="register_back">Back to login</string>
+    <string name="register_header">Create account</string>
+    <string name="register_title">A fresh start, in flow.</string>
+    <string name="register_description">Set up your academic profile. We’ll help you make\nthe most of every week.</string>
+    <string name="register_name_label">Full name</string>
+    <string name="register_email_label">University email</string>
+    <string name="register_password_label">Password</string>
+    <string name="register_password_helper">At least 8 characters</string>
+    <string name="register_university_label">University</string>
+    <string name="register_agreement">I agree to the <font color="#4564ED">Terms of Service</font> and <font color="#4564ED">Privacy Policy</font>.</string>
+    <string name="register_submit">Create Account</string>
+    <string name="register_member">"Already a member? "</string>
+</resources>

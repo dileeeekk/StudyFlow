@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="StudyFlow.PlannerDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="colorSurface">@color/studyflow_white</item>
+        <item name="colorSurfaceContainerHigh">@color/studyflow_white</item>
+        <item name="colorOnSurface">@color/studyflow_ink</item>
+        <item name="colorPrimary">@color/studyflow_primary</item>
+        <item name="android:fontFamily">@font/inter_regular</item>
+        <item name="fontFamily">@font/inter_regular</item>
+        <item name="materialAlertDialogTitleTextStyle">@style/StudyFlow.PlannerDialog.Title</item>
+    </style>
+    <style name="StudyFlow.PlannerDialog.Title" parent="MaterialAlertDialog.Material3.Title.Text">
+        <item name="android:fontFamily">@font/inter_bold</item>
+        <item name="android:textColor">@color/studyflow_ink</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+</resources>

@@ -1,0 +1,8 @@
+{
+  "unchecked_disables": true,
+  "checked_enables": true,
+  "empty_has_no_error": true,
+  "seven_has_error": true,
+  "eight_hides_error": true,
+  "deletion_updates_error": true
+}

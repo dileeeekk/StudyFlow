@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.StudyFlowApp.Onboarding" parent="Theme.Material3.Light.NoActionBar">
+        <item name="android:windowBackground">@color/studyflow_white</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:colorAccent">@color/studyflow_primary</item>
+        <item name="colorPrimary">@color/studyflow_primary</item>
+        <item name="colorOnPrimary">@color/studyflow_white</item>
+    </style>
+
+    <style name="StudyFlow.Onboarding.Text" parent="">
+        <item name="android:fontFamily">@font/inter_regular</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:textColor">@color/studyflow_ink</item>
+    </style>
+</resources>

@@ -1,0 +1,10 @@
+{
+  "server": "https://dileeeekk.pythonanywhere.com/api/",
+  "health": 200,
+  "registration": 201,
+  "login": 200,
+  "profile": 200,
+  "refresh_rotation": "passed",
+  "logout_revocation": "passed",
+  "test_account": "cloud-test-affb0f48d9eb@example.com"
+}

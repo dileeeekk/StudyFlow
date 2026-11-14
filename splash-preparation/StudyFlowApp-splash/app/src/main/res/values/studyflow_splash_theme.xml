@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Base.Theme.StudyFlowApp.Splash" parent="Theme.StudyFlowApp">
+        <item name="android:windowBackground">@color/studyflow_blue_start</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+    <style name="Theme.StudyFlowApp.Splash" parent="Base.Theme.StudyFlowApp.Splash" />
+</resources>

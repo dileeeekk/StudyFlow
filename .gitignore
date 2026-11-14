@@ -1,0 +1,38 @@
+# Local environments, generated builds and IDE state
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.gradle/
+.kotlin/
+.idea/
+build/
+.externalNativeBuild/
+.cxx/
+*.iml
+local.properties
+staticfiles/
+*.log
+.DS_Store
+Thumbs.db
+
+# Secrets, accounts, sessions and signing keys
+.env
+.env.*
+!.env.example
+.local-settings.json
+.studyflow/
+server.json
+*.sqlite3*
+*.db
+*.jks
+*.keystore
+*.pem
+*.key
+auth-session.bin
+ui-test-account.json
+*-process-id.txt
+
+# Local handoff validation output
+.handoff-local/
+StudyFlow-handoff.zip

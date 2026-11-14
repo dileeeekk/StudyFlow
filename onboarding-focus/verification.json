@@ -1,0 +1,62 @@
+{
+  "original_size": "Physical size: 1080x2400",
+  "original_density": "Physical density: 420",
+  "original_font_scale": "1.0",
+  "launch": "Starting: Intent { cmp=com.example.studyflowapp/.MainActivity }\r\nStatus: ok\r\nLaunchState: COLD\r\nActivity: com.example.studyflowapp/.MainActivity\r\nTotalTime: 2587\r\nWaitTime: 2780\r\nComplete",
+  "forward_through_all_pages": true,
+  "reference_bounds_dp": {
+    "onboarding_hero": [
+      24.0,
+      116.0,
+      366.0,
+      448.0
+    ],
+    "onboarding_badge": [
+      24.0,
+      474.0,
+      232.0,
+      496.0
+    ],
+    "onboarding_title": [
+      24.0,
+      509.0,
+      366.0,
+      583.67
+    ],
+    "onboarding_description": [
+      24.0,
+      595.67,
+      366.0,
+      658.67
+    ],
+    "onboarding_pagination": [
+      169.0,
+      688.67,
+      221.0,
+      695.67
+    ],
+    "onboarding_get_started": [
+      24.0,
+      717.67,
+      366.0,
+      769.67
+    ],
+    "onboarding_login": [
+      251.33,
+      775.33,
+      286.67,
+      823.33
+    ]
+  },
+  "title_text": "Make Time Work for\nYou",
+  "description_text": "Build a study rhythm that fits your life. Turn\nfocused moments into goals you can actually\nreach.",
+  "final_cta_feedback_only": true,
+  "back_through_all_pages": true,
+  "forward_after_back": true,
+  "small_screen_actions_reachable": true,
+  "settings_restored": {
+    "size": true,
+    "density": true,
+    "font_scale": true
+  }
+}

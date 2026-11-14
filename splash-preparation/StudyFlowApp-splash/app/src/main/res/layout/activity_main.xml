@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_studyflow_splash"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    tools:context=".MainActivity">
+
+    <!-- 284.5 / 844: logo position in the Figma frame. -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/splash_logo_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3370853" />
+
+    <FrameLayout
+        android:id="@+id/splash_logo"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:importantForAccessibility="noHideDescendants"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/splash_logo_guide">
+
+        <!-- The extra transparent space contains the original soft shadow. -->
+        <ImageView
+            android:layout_width="176dp"
+            android:layout_height="176dp"
+            android:layout_gravity="center"
+            android:contentDescription="@null"
+            android:scaleType="fitXY"
+            android:src="@drawable/studyflow_logo"
+            android:translationY="12dp" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/splash_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/inter_bold"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:letterSpacing="0"
+        android:minHeight="48dp"
+        android:text="@string/studyflow_splash_title"
+        android:textColor="@color/studyflow_white"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/splash_logo" />
+
+    <TextView
+        android:id="@+id/splash_subtitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="11dp"
+        android:fontFamily="@font/inter_regular"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:letterSpacing="0"
+        android:minHeight="20dp"
+        android:text="@string/studyflow_splash_subtitle"
+        android:textColor="@color/studyflow_subtitle"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/splash_title" />
+
+    <!-- 720 / 844: top of the three decorative dots. -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/splash_footer_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8530806" />
+
+    <LinearLayout
+        android:id="@+id/splash_dots"
+        android:layout_width="wrap_content"
+        android:layout_height="5dp"
+        android:importantForAccessibility="noHideDescendants"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/splash_footer_guide">
+
+        <View
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:background="@drawable/bg_studyflow_dot" />
+
+        <View
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:layout_marginStart="6dp"
+            android:alpha="0.333333"
+            android:background="@drawable/bg_studyflow_dot" />
+
+        <View
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:layout_marginStart="6dp"
+            android:alpha="0.333333"
+            android:background="@drawable/bg_studyflow_dot" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/splash_tagline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/inter_medium"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:letterSpacing="0"
+        android:text="@string/studyflow_splash_tagline"
+        android:textColor="@color/studyflow_tagline"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/splash_dots" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

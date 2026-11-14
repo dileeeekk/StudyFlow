@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="19dp" android:height="19dp" android:viewportWidth="19" android:viewportHeight="19">
+    <group android:translateX="-313" android:translateY="-288.5">
+        <path android:pathData="M322.5 298.792C324.686 298.792 326.458 297.019 326.458 294.833C326.458 292.647 324.686 290.875 322.5 290.875C320.314 290.875 318.542 292.647 318.542 294.833C318.542 297.019 320.314 298.792 322.5 298.792ZM322.5 298.792C324.179 298.792 325.79 299.459 326.978 300.647C328.165 301.834 328.832 303.445 328.832 305.125M322.5 298.792C320.82 298.792 319.209 299.459 318.022 300.647C316.834 301.834 316.167 303.445 316.167 305.125" android:fillColor="@android:color/transparent" android:strokeColor="@color/studyflow_muted" android:strokeWidth="1" android:strokeLineCap="round" android:strokeLineJoin="round" />
+    </group>
+</vector>

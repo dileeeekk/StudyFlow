@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="studyflow_splash_title" translatable="false">StudyFlow</string>
+    <string name="studyflow_splash_subtitle">Organize Your Academic Life</string>
+    <string name="studyflow_splash_tagline">LESS CHAOS. MORE FLOW.</string>
+</resources>

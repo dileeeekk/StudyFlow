@@ -1,0 +1,16 @@
+{
+  "cloud_new_account_empty": true,
+  "ui_create_task": true,
+  "ui_complete_and_reopen_task": true,
+  "ui_date_time_picker": true,
+  "ui_create_lesson": true,
+  "ui_note_create_edit_delete": true,
+  "ui_goal_and_study_time": true,
+  "cloud_persistence_verified": true,
+  "backend_tests": 15,
+  "final_apk_build": "passed",
+  "final_emulator_launch": "passed",
+  "restart_preserves_data": true,
+  "offline_save_retains_draft": true,
+  "header_preserved": true
+}

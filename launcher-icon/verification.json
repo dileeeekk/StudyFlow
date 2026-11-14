@@ -1,0 +1,11 @@
+{
+  "changed_resources": [
+    "drawable\\ic_launcher_background.xml",
+    "drawable\\ic_launcher_foreground.xml",
+    "mipmap-anydpi\\ic_launcher.xml",
+    "mipmap-anydpi\\ic_launcher_round.xml"
+  ],
+  "build": "assembleDebug BUILD SUCCESSFUL",
+  "install": "adb install -r Success",
+  "preview": "preview.png"
+}

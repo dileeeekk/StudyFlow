@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="onboarding_classes_card_title">Right class. Right place.</string>
+    <string name="onboarding_classes_card_detail">Calculus II · Room B-204</string>
+    <string name="onboarding_classes_badge">02 / YOUR ACADEMIC LIFE, SIMPLIFIED</string>
+    <string name="onboarding_classes_title">Never Miss a Class</string>
+    <string name="onboarding_classes_description">See your classes, rooms and lecturers at a glance.\nArrive ready, with your day already mapped out.</string>
+</resources>

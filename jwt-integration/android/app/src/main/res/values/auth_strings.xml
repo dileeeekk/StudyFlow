@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="auth_signing_in">Logging in…</string>
+    <string name="auth_registering">Creating account…</string>
+    <string name="auth_error_title">Unable to continue</string>
+    <string name="auth_retry">Try again</string>
+    <string name="auth_logout">Log Out</string>
+    <string name="auth_account">Your account</string>
+    <string name="auth_greeting">Hi, %1$s ✦</string>
+    <string name="auth_local_permission">Allow Nearby devices access in the app settings to connect to the local development server, then try again.</string>
+    <string name="auth_offline_title">Cannot load your account</string>
+    <string name="auth_cancel">Cancel</string>
+    <string name="auth_open_settings">Open settings</string>
+</resources>

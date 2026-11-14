@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="fresh_label">YOUR FRESH START</string>
+  <string name="fresh_greeting">Hello, %1$s.</string>
+  <string name="fresh_focus">A little focus, daily</string>
+  <string name="fresh_no_tasks">No completed tasks yet</string>
+  <string name="fresh_no_deadlines">No deadlines yet</string>
+  <string name="fresh_zero">0</string>
+  <string name="fresh_percent">0%</string>
+  <string name="fresh_progress">0 percent completed</string>
+  <string name="fresh_setup">Make room for your best</string>
+  <string name="fresh_setup_count">0 of 3</string>
+  <string name="fresh_classes">Add your classes</string>
+  <string name="fresh_task">Create your first task</string>
+  <string name="fresh_goal">Set a study goal</string>
+  <string name="fresh_add">Add your first task</string>
+  <string name="fresh_timetable">Set up your timetable</string>
+  <string name="fresh_tasks_later">Your tasks will appear here once task creation is available.</string>
+  <string name="fresh_schedule_later">Your classes will appear here once the timetable is available.</string>
+  <string name="fresh_goal_later">Study goals will be available in a later step.</string>
+  <string name="fresh_profile">Open your profile</string>
+  <string name="fresh_classes_count_label">Classes</string>
+</resources>
