@@ -18,7 +18,10 @@ class PlannerUi(private val activity: AppCompatActivity, private val expired: ()
     private val vm=ViewModelProvider(activity)[PlannerViewModel::class.java]
     private var data=JSONObject()
     private var tab="home"
+    private var taskFilter="all"
+    private var taskSort=0
     private var busy=false
+    private var scheduleDay=Calendar.getInstance()
     private fun view(id:Int):View=activity.findViewById(id)
     private fun text(id:Int,value:String) { activity.findViewById<TextView>(id).text=value }
     private fun list(key:String):List<JSONObject> { val a=data.optJSONArray(key)?:return emptyList();return (0 until a.length()).map{a.getJSONObject(it)} }
@@ -42,10 +45,24 @@ class PlannerUi(private val activity: AppCompatActivity, private val expired: ()
             busy=state.busy
             if(state.expired) { expired();return@observe }
             state.data?.let { data=it }
-            text(R.id.planner_status,when { state.busy -> "Syncing your planner…";state.error!=null -> state.error + if(state.data!=null) " Your last loaded data is still shown." else " Tap Retry to load your planner.";else -> "" })
+            text(R.id.planner_status,when { state.busy -> "Syncing your planner…";state.error!=null -> state.error+" Your last loaded data is still shown.";else -> "" })
             view(R.id.planner_status).visibility=if(state.busy||state.error!=null)View.VISIBLE else View.GONE
             view(R.id.planner_retry).visibility=if(state.error!=null&&!busy)View.VISIBLE else View.GONE
             render()
+        }
+        view(R.id.schedule_previous).setOnClickListener { scheduleDay.add(Calendar.DAY_OF_YEAR,-7);render() }
+        view(R.id.schedule_next).setOnClickListener { scheduleDay.add(Calendar.DAY_OF_YEAR,7);render() }
+        view(R.id.schedule_week).setOnClickListener { scheduleDay=Calendar.getInstance();render() }
+        view(R.id.schedule_add).setOnClickListener {
+            val start=(scheduleDay.clone() as Calendar).apply { set(Calendar.HOUR_OF_DAY,9);set(Calendar.MINUTE,0) }
+            val end=(start.clone() as Calendar).apply { add(Calendar.HOUR_OF_DAY,1) }
+            val f=SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX",Locale.US)
+            open("lessons",JSONObject().put("starts_at",f.format(start.time)).put("ends_at",f.format(end.time)))
+        }
+        view(R.id.tasks_first).setOnClickListener { open("tasks") }
+        mapOf(R.id.tasks_filter_all to "all",R.id.tasks_filter_soon to "soon",R.id.tasks_filter_done to "done").forEach { (id,key)->view(id).setOnClickListener { taskFilter=key;render() } }
+        view(R.id.tasks_sort).setOnClickListener {
+            plannerDialog(activity).setTitle("Sort tasks").setSingleChoiceItems(arrayOf("By deadline","By priority","By title"),taskSort){d,i->taskSort=i;d.dismiss();render()}.show()
         }
         vm.load()
     }
@@ -55,13 +72,20 @@ class PlannerUi(private val activity: AppCompatActivity, private val expired: ()
     private fun select(key:String) { tab=key;render();activity.findViewById<androidx.core.widget.NestedScrollView>(R.id.home_scroll).smoothScrollTo(0,0) }
     private fun render() {
         val tasks=list("tasks");val lessons=list("lessons");val notes=list("notes");val focus=list("focus")
+        view(R.id.home_notification_dot).visibility=if(tasks.any { !it.optBoolean("completed") })View.VISIBLE else View.GONE
         val goal=data.optJSONObject("goal")
         val populated=tasks.isNotEmpty()||lessons.isNotEmpty()||notes.isNotEmpty()||focus.isNotEmpty()||goal!=null
         view(R.id.planner_empty).visibility=if(tab=="home"&&!populated)View.VISIBLE else View.GONE
         view(R.id.planner_populated).visibility=if(tab=="home"&&populated)View.VISIBLE else View.GONE
-        view(R.id.planner_collection).visibility=if(tab!="home")View.VISIBLE else View.GONE
+        view(R.id.planner_collection).visibility=if(tab!="home" && tab!="lessons" && tab!="tasks")View.VISIBLE else View.GONE
         view(R.id.planner_add_container).visibility=if(populated||tab!="home")View.VISIBLE else View.GONE
         for(id in listOf(R.id.home_add,R.id.home_timetable,R.id.home_setup_task,R.id.home_setup_classes,R.id.home_setup_goal,R.id.planner_add))view(id).isEnabled=!busy && vm.state.value?.data != null
+        view(R.id.home_header).visibility=if(tab=="lessons" || tab=="tasks")View.GONE else View.VISIBLE
+        view(R.id.schedule_root).visibility=if(tab=="lessons")View.VISIBLE else View.GONE
+        if(tab=="lessons")view(R.id.planner_add_container).visibility=View.GONE
+        view(R.id.schedule_add).isEnabled=!busy && vm.state.value?.data!=null
+        view(R.id.tasks_root).visibility=if(tab=="tasks")View.VISIBLE else View.GONE
+        if(tab=="tasks")view(R.id.planner_add_container).visibility=if(tasks.isEmpty())View.GONE else View.VISIBLE
         val keys=listOf("home","lessons","tasks","notes")
         val navIds=listOf(R.id.home_tab_home,R.id.home_tab_schedule,R.id.home_tab_tasks,R.id.home_tab_notes)
         navIds.forEachIndexed { i,id ->
@@ -71,6 +95,8 @@ class PlannerUi(private val activity: AppCompatActivity, private val expired: ()
         }
         text(R.id.planner_count_tasks,tasks.size.toString());text(R.id.planner_count_lessons,lessons.size.toString());text(R.id.planner_count_notes,notes.size.toString())
         text(R.id.planner_setup_count,"${listOf(tasks.isNotEmpty(),lessons.isNotEmpty(),goal!=null).count{it}} of 3")
+        if(tab=="tasks") { renderTasks(tasks);return }
+        if(tab=="lessons") { renderSchedule(lessons);return }
         if(tab!="home") {
             text(R.id.planner_collection_title,when(tab){"tasks"->"Your tasks";"lessons"->"Your timetable";"focus"->"Study history";else->"Your notes"})
             val items=when(tab){"tasks"->tasks.sortedWith(compareBy<JSONObject>{it.optBoolean("completed")}.thenBy{timestamp(it.optString("due_at"))?:0L});"lessons"->lessons.sortedBy{timestamp(it.optString("starts_at"))};"focus"->focus.sortedByDescending{it.optString("date")};else->notes.reversed()}
@@ -107,13 +133,89 @@ class PlannerUi(private val activity: AppCompatActivity, private val expired: ()
         if(pending.isEmpty())noteCard(priorities,"All clear","Add a task when you’re ready."){open("tasks")}
         else pending.take(3).forEach{taskCard(priorities,it)}
         val todays=lessons.filter{timestamp(it.optString("starts_at"))?.let(::day)==today}.sortedBy{timestamp(it.optString("starts_at"))}
-        text(R.id.home_class_count,if(todays.size==1) "1 class" else "${todays.size} classes")
+        text(R.id.home_class_count,"${todays.size} classes")
         val classes=activity.findViewById<LinearLayout>(R.id.planner_today_list);classes.removeAllViews()
         if(todays.isEmpty())noteCard(classes,"No classes today","Set up your timetable to see your classes here."){open("lessons")}
         else todays.forEach{classCard(classes,it)}
         val upcoming=lessons.filter{(timestamp(it.optString("starts_at"))?:0)>System.currentTimeMillis()}.minByOrNull{timestamp(it.optString("starts_at"))?:Long.MAX_VALUE}
         text(R.id.home_up_next,if(upcoming==null)"No upcoming classes" else "Up next · ${format(upcoming.optString("starts_at"),"EEE HH:mm")} ${upcoming.optString("title")} · ${upcoming.optString("room")}")
     }
+    private fun renderTasks(tasks:List<JSONObject>) {
+        val empty=tasks.isEmpty();val done=tasks.filter { it.optBoolean("completed") };val pending=tasks.filter { !it.optBoolean("completed") }
+        text(R.id.tasks_title,if(empty)"Tasks" else "Tasks & deadlines")
+        text(R.id.tasks_subtitle,if(empty)"0 tasks · 0 deadlines" else "One thing at a time. You’ve got this.")
+        view(R.id.tasks_eyebrow).visibility=if(empty)View.VISIBLE else View.GONE
+        view(R.id.tasks_progress).visibility=if(empty)View.GONE else View.VISIBLE
+        text(R.id.tasks_progress_title,"${done.size} of ${tasks.size} tasks completed     ${if(empty)0 else done.size*100/tasks.size}%")
+        val weekEnd=System.currentTimeMillis()+7*24*60*60*1000L
+        val soon=pending.filter { (timestamp(it.optString("due_at"))?:Long.MAX_VALUE)<=weekEnd }
+        text(R.id.tasks_progress_detail,"${pending.size} open · ${soon.size} due within 7 days or overdue")
+        view(R.id.tasks_filter_hint).visibility=if(empty)View.VISIBLE else View.GONE
+        mapOf(R.id.tasks_filter_all to "all",R.id.tasks_filter_soon to "soon",R.id.tasks_filter_done to "done").forEach { (id,key)->
+            view(id).isEnabled=!empty;view(id).alpha=if(empty)0.5f else 1f
+            view(id).setBackgroundResource(if(!empty && taskFilter==key)R.drawable.bg_login_card else android.R.color.transparent)
+        }
+        view(R.id.tasks_empty).visibility=if(empty)View.VISIBLE else View.GONE
+        view(R.id.tasks_content).visibility=if(empty)View.GONE else View.VISIBLE
+        view(R.id.tasks_first).isEnabled=!busy && vm.state.value?.data!=null
+        text(R.id.tasks_sort,listOf("By deadline ↓","By priority ↓","By title ↓")[taskSort])
+        val upcoming=activity.findViewById<LinearLayout>(R.id.tasks_pending);upcoming.removeAllViews()
+        val completed=activity.findViewById<LinearLayout>(R.id.tasks_completed);completed.removeAllViews()
+        view(R.id.tasks_pending_title).visibility=if(taskFilter=="done")View.GONE else View.VISIBLE
+        view(R.id.tasks_completed_title).visibility=if(taskFilter=="soon")View.GONE else View.VISIBLE
+        val filtered=if(taskFilter=="soon")soon else pending
+        val sorted=when(taskSort){1->filtered.sortedWith(compareBy<JSONObject>{listOf("high","medium","low").indexOf(it.optString("priority"))}.thenBy{timestamp(it.optString("due_at"))});2->filtered.sortedBy{it.optString("title").lowercase(Locale.ROOT)};else->filtered.sortedBy{timestamp(it.optString("due_at"))}}
+        if(taskFilter!="done") {
+            if(sorted.isEmpty())noteCard(upcoming,"All clear",if(taskFilter=="soon")"No tasks due within the next 7 days." else "No open tasks."){open("tasks")}
+            sorted.forEach { taskCard(upcoming,it) }
+        }
+        if(taskFilter!="soon") {
+            if(done.isEmpty())noteCard(completed,"No completed tasks yet","Check off a task when you finish it."){taskFilter="all";render()}
+            done.sortedByDescending { timestamp(it.optString("completed_at"))?:0 }.forEach { taskCard(completed,it) }
+        }
+    }
+    private fun renderSchedule(lessons:List<JSONObject>) {
+        val monday=(scheduleDay.clone() as Calendar).apply { add(Calendar.DAY_OF_YEAR,-((get(Calendar.DAY_OF_WEEK)+5)%7));set(Calendar.HOUR_OF_DAY,0);set(Calendar.MINUTE,0);set(Calendar.SECOND,0);set(Calendar.MILLISECOND,0) }
+        val end=(monday.clone() as Calendar).apply { add(Calendar.DAY_OF_YEAR,7) }
+        val week=lessons.filter { (timestamp(it.optString("starts_at"))?:0) in monday.timeInMillis until end.timeInMillis }
+        val f=SimpleDateFormat("MMM d",Locale.ENGLISH)
+        text(R.id.schedule_range,f.format(monday.time)+" – "+f.format(Date(end.timeInMillis-1))+", "+monday.get(Calendar.YEAR))
+        text(R.id.schedule_week,if(System.currentTimeMillis() in monday.timeInMillis until end.timeInMillis)"This week" else "Back to this week")
+        val days=activity.findViewById<LinearLayout>(R.id.schedule_days);days.removeAllViews()
+        repeat(7) { offset ->
+            val date=(monday.clone() as Calendar).apply { add(Calendar.DAY_OF_YEAR,offset) }
+            val selected=day(date.timeInMillis)==day(scheduleDay.timeInMillis)
+            val count=week.count { timestamp(it.optString("starts_at"))?.let(::day)==day(date.timeInMillis) }
+            val cell=TextView(activity).apply {
+                layoutParams=LinearLayout.LayoutParams(0,dp(68),1f).apply { setMargins(dp(2),0,dp(2),0) }
+                gravity=android.view.Gravity.CENTER;text=SimpleDateFormat("EEE",Locale.ENGLISH).format(date.time)+"\n"+date.get(Calendar.DAY_OF_MONTH)+(if(count>0)"\n•" else "\n")
+                textSize=12f;typeface=androidx.core.content.res.ResourcesCompat.getFont(activity,R.font.inter_medium)
+                setTextColor(if(selected)Color.WHITE else Color.rgb(23,36,67))
+                setBackgroundResource(if(selected)R.drawable.bg_home_plus else R.drawable.bg_login_field)
+                contentDescription=SimpleDateFormat("EEEE, MMMM d",Locale.ENGLISH).format(date.time)+", $count classes"
+                setOnClickListener { scheduleDay=date;render() }
+            };days.addView(cell)
+        }
+        val today=week.filter { timestamp(it.optString("starts_at"))?.let(::day)==day(scheduleDay.timeInMillis) }.sortedBy { timestamp(it.optString("starts_at")) }
+        text(R.id.schedule_day_title,SimpleDateFormat("EEEE, MMMM d",Locale.ENGLISH).format(scheduleDay.time)+" · ${today.size} "+if(today.size==1)"class" else "classes")
+        val cards=activity.findViewById<LinearLayout>(R.id.schedule_cards);cards.removeAllViews()
+        today.forEachIndexed { index,item ->
+            val start=timestamp(item.optString("starts_at"))?:0;val finish=timestamp(item.optString("ends_at"))?:0;val now=System.currentTimeMillis()
+            val live=now in start until finish
+            if(live)noteCard(cards,"● IN PROGRESS","${((finish-now)/60000).coerceAtLeast(0)} minutes remaining"){open("lessons",item)}
+            classCard(cards,item)
+            val row=cards.getChildAt(cards.childCount-1)
+            row.setBackgroundResource(if(live)R.drawable.bg_login_field else R.drawable.bg_login_card)
+            if(finish<now)row.alpha=0.6f
+            if(live)cards.addView(ProgressBar(activity,null,android.R.attr.progressBarStyleHorizontal).apply { max=100;progress=((now-start)*100/(finish-start).coerceAtLeast(1)).toInt();progressTintList=android.content.res.ColorStateList.valueOf(Color.rgb(69,100,237));layoutParams=LinearLayout.LayoutParams(-1,dp(4)).apply { topMargin=dp(8) } })
+            val next=today.getOrNull(index+1)?.let { timestamp(it.optString("starts_at")) }
+            if(next!=null && next>finish)noteCard(cards,"Break · ${(next-finish)/60000} min","Recharge before your next class."){open("lessons",today[index+1])}
+        }
+        view(R.id.schedule_empty).visibility=if(today.isEmpty())View.VISIBLE else View.GONE
+        text(R.id.schedule_empty_title,if(week.isEmpty())"Your week is empty" else "Your day is free")
+        text(R.id.schedule_empty_detail,"Bring your classes together in one place. We’ll help you find the space between.")
+    }
+    private fun dp(value:Int)=(value*activity.resources.displayMetrics.density).toInt()
     private fun taskCard(parent:LinearLayout,item:JSONObject) {
         val row=activity.layoutInflater.inflate(R.layout.item_home_task,parent,false)
         row.findViewById<TextView>(R.id.home_problem_title).apply { text=item.optString("title");paintFlags=if(item.optBoolean("completed"))paintFlags or Paint.STRIKE_THRU_TEXT_FLAG else paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv() }
@@ -127,6 +229,14 @@ class PlannerUi(private val activity: AppCompatActivity, private val expired: ()
             isChecked=item.optBoolean("completed");isEnabled=!busy;contentDescription="Complete ${item.optString("title") }"
             setOnCheckedChangeListener{_,checked->vm.save("tasks",JSONObject().put("completed",checked),item.getLong("id"),UUID.randomUUID().toString())}
         }
+        if(tab=="tasks") {
+            val completed=item.optBoolean("completed")
+            row.findViewById<TextView>(R.id.home_problem_detail).text=listOf(item.optString("subject"),format(item.optString("due_at"),"EEE, d MMM · HH:mm"),if(completed)"Done "+format(item.optString("completed_at"),"d MMM") else remaining(item.optString("due_at"))).filter{it.isNotBlank()}.joinToString("\n")
+            if(completed)row.findViewById<TextView>(R.id.home_high).apply {
+                text="Completed";setTextColor(Color.rgb(0,132,110))
+                background=android.graphics.drawable.GradientDrawable().apply { setColor(Color.rgb(229,245,239));cornerRadius=dp(12).toFloat() }
+            }
+        }
         row.setOnClickListener{open("tasks",item)};parent.addView(row)
     }
     private fun classCard(parent:LinearLayout,item:JSONObject) {
@@ -135,9 +245,6 @@ class PlannerUi(private val activity: AppCompatActivity, private val expired: ()
         row.findViewById<TextView>(R.id.home_end).text=format(item.optString("ends_at"),"HH:mm")
         row.findViewById<TextView>(R.id.home_calculus).text=item.optString("title")
         row.findViewById<TextView>(R.id.home_room).text=listOf(format(item.optString("starts_at"),"EEE, d MMM"),item.optString("room"),item.optString("lecturer")).filter{it.isNotBlank()}.joinToString(" · ")
-        val now=System.currentTimeMillis()
-        val live=now >= (timestamp(item.optString("starts_at"))?:Long.MAX_VALUE) && now < (timestamp(item.optString("ends_at"))?:0L)
-        row.findViewById<View>(R.id.planner_class_live).visibility=if(live)View.VISIBLE else View.GONE
         row.setOnClickListener{open("lessons",item)};parent.addView(row)
     }
     private fun noteCard(parent:LinearLayout,title:String,detail:String,click:()->Unit) {
