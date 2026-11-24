@@ -29,6 +29,8 @@ class PlannerForm : DialogFragment() {
     private var due = System.currentTimeMillis() + 3600000
     private var end = due + 3600000
     private var priority = "medium"
+    private val repeatDays = linkedSetOf<Int>()
+    private val repeatControls = mutableListOf<CheckBox>()
     private val timeFormat get() = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX", Locale.US)
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -40,37 +42,49 @@ class PlannerForm : DialogFragment() {
         due = savedInstanceState?.getLong("due") ?: parse(draft.optString(if (kind == "tasks") "due_at" else "starts_at"))
         end = savedInstanceState?.getLong("end") ?: parse(draft.optString("ends_at"), due + 3600000)
         priority = savedInstanceState?.getString("priority") ?: draft.optString("priority", "medium")
+        repeatDays.clear()
+        draft.optString("repeat_days").split(",")
+            .mapNotNull { it.toIntOrNull() }
+            .filter { it in Calendar.MONDAY..Calendar.SUNDAY }
+            .forEach { repeatDays.add(it) }
         val view = layoutInflater.inflate(R.layout.dialog_planner_form, null)
         host = view.findViewById(R.id.planner_form_fields); error = view.findViewById(R.id.planner_form_error)
         val title = when(kind) {
-            "tasks" -> if (id == null) "New task" else "Edit task"
-            "lessons" -> if (id == null) "Add a class" else "Edit class"
-            "notes" -> if (id == null) "New note" else "Edit note"
-            "goal" -> "Your weekly study goal"
-            else -> if (id == null) "Log study time" else "Edit study time"
+            "tasks" -> if (id == null) getString(R.string.form_task_new) else getString(R.string.form_task_edit)
+            "lessons" -> if (id == null) "Add a class" else getString(R.string.form_class_edit)
+            "notes" -> if (id == null) getString(R.string.form_note_new) else getString(R.string.form_note_edit)
+            "goal" -> getString(R.string.form_goal_title)
+            else -> if (id == null) getString(R.string.form_focus_new) else getString(R.string.form_focus_edit)
         }
         when (kind) {
             "tasks" -> {
-                field("title", "Task name", 160); field("subject", "Subject (optional)", 120)
-                picker("Deadline", false)
-                val labels = arrayOf("High", "Medium", "Low")
-                val row = field("priority_display", "Priority", 20)
-                row.setText(priority.replaceFirstChar { it.uppercase() }); row.isFocusable = false
+                field("title", getString(R.string.form_task_name), 160); field("subject", getString(R.string.form_subject_optional), 120)
+                picker(getString(R.string.form_deadline), false)
+                val labels = arrayOf(getString(R.string.planner_priority_high), getString(R.string.planner_priority_medium), getString(R.string.planner_priority_low))
+                val row = field("priority_display", getString(R.string.form_priority), 20)
+                row.setText(when (priority.lowercase(Locale.US)) { "high" -> getString(R.string.planner_priority_high); "medium" -> getString(R.string.planner_priority_medium); "low" -> getString(R.string.planner_priority_low); else -> priority }); row.isFocusable = false
                 row.setOnClickListener {
-                    plannerDialog(requireContext()).setTitle("Priority").setSingleChoiceItems(labels, labels.indexOfFirst { it.equals(priority, true) }) { d, index ->
+                    plannerDialog(requireContext()).setTitle(R.string.planner_priority_title).setSingleChoiceItems(labels, labels.indexOfFirst { it.equals(priority, true) }) { d, index ->
                         priority = labels[index].lowercase(Locale.US); row.setText(labels[index]); d.dismiss()
                     }.show()
                 }
             }
-            "lessons" -> { field("title", "Class name", 160); field("room", "Room (optional)",120); field("lecturer", "Lecturer (optional)",120); picker("Starts",false); picker("Ends",true) }
-            "notes" -> { field("title","Title",160); field("body","Note",5000).apply { inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE; setSingleLine(false); minLines = 4 } }
-            "goal" -> field("hours", "Study hours in 7 days (0.5–168)", 6).apply {
+            "lessons" -> {
+                field("title", getString(R.string.form_class_name), 160)
+                field("room", getString(R.string.form_room_optional), 120)
+                field("lecturer", getString(R.string.form_lecturer_optional), 120)
+                picker(getString(R.string.form_starts), false)
+                picker(getString(R.string.form_ends), true)
+                if (id == null) addWeeklyRepeatControls()
+            }
+            "notes" -> { field("title",getString(R.string.form_title),160); field("body",getString(R.string.form_note),5000).apply { inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE; setSingleLine(false); minLines = 4 } }
+            "goal" -> field("hours", getString(R.string.form_study_hours), 6).apply {
                 inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
                 if (!draft.has("hours") && draft.has("weekly_minutes")) setText((draft.getInt("weekly_minutes")/60.0).toString())
             }
             "focus" -> {
-                field("minutes","Minutes studied (1–1440)",4).inputType = InputType.TYPE_CLASS_NUMBER
-                val date = field("date", "Date", 10); date.isFocusable = false
+                field("minutes",getString(R.string.form_minutes),4).inputType = InputType.TYPE_CLASS_NUMBER
+                val date = field("date", getString(R.string.form_date), 10); date.isFocusable = false
                 if (date.text.isBlank()) date.setText(SimpleDateFormat("yyyy-MM-dd",Locale.US).format(Date()))
                 date.setOnClickListener {
                     val c=Calendar.getInstance(); DatePickerDialog(requireContext(), { _, y,m,d -> date.setText(String.format(Locale.US,"%04d-%02d-%02d",y,m+1,d)) },c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH)).apply { datePicker.maxDate=System.currentTimeMillis() }.show()
@@ -78,8 +92,8 @@ class PlannerForm : DialogFragment() {
             }
         }
         val builder = plannerDialog(requireContext()).setTitle(title).setView(view)
-            .setNegativeButton("Cancel", null).setPositiveButton("Save",null)
-        if (id != null || (kind=="goal" && draft.has("weekly_minutes"))) builder.setNeutralButton("Delete",null)
+            .setNegativeButton(R.string.common_cancel, null).setPositiveButton(R.string.common_save,null)
+        if (id != null || (kind=="goal" && draft.has("weekly_minutes"))) builder.setNeutralButton(R.string.common_delete,null)
         return builder.create()
     }
     override fun onStart() {
@@ -88,8 +102,8 @@ class PlannerForm : DialogFragment() {
         dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener { save() }
         dialog.getButton(AlertDialog.BUTTON_NEUTRAL)?.setOnClickListener {
-            plannerDialog(requireContext()).setTitle("Delete this item?").setMessage("This will remove it from your account.")
-                .setNegativeButton("Cancel",null).setPositiveButton("Delete") { _, _ ->
+            plannerDialog(requireContext()).setTitle(R.string.form_delete_title).setMessage(R.string.form_delete_message)
+                .setNegativeButton(R.string.common_cancel,null).setPositiveButton(R.string.common_delete) { _, _ ->
                     operation=UUID.randomUUID().toString(); vm.delete(kind,id,operation!!)
                 }.show()
         }
@@ -100,6 +114,7 @@ class PlannerForm : DialogFragment() {
             dialog.getButton(AlertDialog.BUTTON_NEUTRAL)?.isEnabled = !state.busy
             isCancelable = !state.busy
             for (field in fields.values) field.isEnabled = !state.busy
+            for (checkbox in repeatControls) checkbox.isEnabled = !state.busy
             if (!state.busy && operation != null && state.operation == operation) {
                 if (state.error == null) dismiss() else showError(state.error)
             }
@@ -114,6 +129,60 @@ class PlannerForm : DialogFragment() {
         input.filters=arrayOf(android.text.InputFilter.LengthFilter(limit))
         input.setText(draft.optString(key,"")); fields[key]=input;host.addView(row); return input
     }
+    private fun addWeeklyRepeatControls() {
+        val heading = TextView(requireContext()).apply {
+            text = getString(R.string.form_repeat_title)
+            textSize = 13f
+            setTextColor(android.graphics.Color.rgb(23, 36, 67))
+            setPadding(0, dp(14), 0, dp(8))
+        }
+        host.addView(heading)
+
+        val row = LinearLayout(requireContext()).apply {
+            orientation = LinearLayout.HORIZONTAL
+            gravity = android.view.Gravity.CENTER
+        }
+
+        val initials = requireContext().resources.getStringArray(R.array.planner_weekday_initials)
+        val fullNames = requireContext().resources.getStringArray(R.array.planner_weekday_names)
+        val days = listOf(
+            Calendar.MONDAY, Calendar.TUESDAY, Calendar.WEDNESDAY,
+            Calendar.THURSDAY, Calendar.FRIDAY, Calendar.SATURDAY, Calendar.SUNDAY
+        ).mapIndexed { index, day -> day to initials[index] }
+
+        days.forEachIndexed { index, pair ->
+            val checkbox = CheckBox(requireContext()).apply {
+                text = pair.second
+                textSize = 12f
+                gravity = android.view.Gravity.CENTER
+                contentDescription = fullNames[index]
+                isChecked = repeatDays.contains(pair.first)
+                setPadding(0, 0, 0, 0)
+                setOnCheckedChangeListener { _, checked ->
+                    if (checked) repeatDays.add(pair.first)
+                    else repeatDays.remove(pair.first)
+                }
+            }
+            repeatControls.add(checkbox)
+            row.addView(
+                checkbox,
+                LinearLayout.LayoutParams(0, -2, 1f)
+            )
+        }
+        host.addView(row)
+
+        val hint = TextView(requireContext()).apply {
+            text = getString(R.string.form_repeat_hint)
+            textSize = 11f
+            setTextColor(android.graphics.Color.rgb(102, 114, 139))
+            setPadding(0, dp(5), 0, dp(10))
+        }
+        host.addView(hint)
+    }
+
+    private fun dp(value: Int): Int =
+        (value * resources.displayMetrics.density + 0.5f).toInt()
+
     private fun picker(label:String, isEnd:Boolean) {
         val input=field(if(isEnd) "end_display" else "due_display",label,80)
         input.isFocusable=false
@@ -138,8 +207,44 @@ class PlannerForm : DialogFragment() {
         when(kind) {
             "tasks" -> { data.put("due_at",timeFormat.format(Date(due)));data.put("priority",priority) }
             "lessons" -> {
-                if(end<=due) { showError("End time must be after start time.");return }
-                data.put("starts_at",timeFormat.format(Date(due)));data.put("ends_at",timeFormat.format(Date(end)))
+                if (end <= due) {
+                    showError("End time must be after start time.")
+                    return
+                }
+
+                if (repeatDays.isNotEmpty() && id == null) {
+                    val duration = end - due
+                    val cursor = Calendar.getInstance().apply {
+                        timeInMillis = due
+                    }
+                    val occurrences = mutableListOf<JSONObject>()
+
+                    repeat(84) {
+                        if (cursor.get(Calendar.DAY_OF_WEEK) in repeatDays) {
+                            val occurrenceStart = cursor.timeInMillis
+                            val occurrenceEnd = occurrenceStart + duration
+
+                            occurrences.add(
+                                JSONObject(data.toString())
+                                    .put("starts_at", timeFormat.format(Date(occurrenceStart)))
+                                    .put("ends_at", timeFormat.format(Date(occurrenceEnd)))
+                            )
+                        }
+                        cursor.add(Calendar.DAY_OF_YEAR, 1)
+                    }
+
+                    if (occurrences.isEmpty()) {
+                        showError("No matching class dates were generated.")
+                        return
+                    }
+
+                    operation = UUID.randomUUID().toString()
+                    vm.saveLessons(occurrences, operation!!)
+                    return
+                }
+
+                data.put("starts_at", timeFormat.format(Date(due)))
+                data.put("ends_at", timeFormat.format(Date(end)))
             }
             "goal" -> {
                 val hours=data.optString("hours").replace(',','.').toDoubleOrNull()
@@ -159,6 +264,7 @@ class PlannerForm : DialogFragment() {
         for((k,v) in fields) draft.put(k,v.text.toString())
         outState.putString("draft",draft.toString());outState.putString("operation",operation)
         outState.putLong("due",due);outState.putLong("end",end);outState.putString("priority",priority)
+        draft.put("repeat_days", repeatDays.sorted().joinToString(","))
         super.onSaveInstanceState(outState)
     }
     private fun parse(value:String, fallback:Long=System.currentTimeMillis()+3600000):Long = PlannerUi.timestamp(value) ?: fallback

@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="planner_add_title">Добавить в StudyFlow</string>
+    <string name="planner_sort_title">Сортировка задач</string>
+    <string name="planner_syncing">Синхронизация планировщика…</string>
+    <string name="planner_stale_data_suffix">Показаны последние загруженные данные.</string>
+    <string name="planner_completed">Выполнено</string>
+    <string name="planner_done_prefix">Готово: %1$s</string>
+    <string name="planner_task_complete_accessibility">Отметить задачу «%1$s» выполненной</string>
+    <string name="planner_progress_title">Ваш учебный прогресс</string>
+    <string name="planner_timer_title">Учебный таймер</string>
+    <string name="planner_start">Старт</string>
+    <string name="planner_pause">Пауза</string>
+    <string name="planner_running">Учебная сессия выполняется.</string>
+    <string name="planner_paused">Пауза. Нажмите «Старт», чтобы продолжить.</string>
+    <string name="planner_finish_save">Завершить и сохранить</string>
+    <string name="planner_min_duration">Для сохранения занимайтесь не менее одной минуты.</string>
+    <string name="planner_saving">Сохранение учебной сессии…</string>
+    <string name="planner_minutes_saved">Сохранено минут: %1$d!</string>
+    <string name="planner_save_error">Не удалось сохранить: %1$s</string>
+    <string name="planner_deadlines_title">Ближайшие дедлайны</string>
+    <string name="planner_no_deadlines">Нет предстоящих дедлайнов.</string>
+    <string name="planner_overdue">Просрочено</string>
+    <string name="planner_days_hours">Осталось %1$d дн. %2$d ч.</string>
+    <string name="planner_hours_minutes">Осталось %1$d ч. %2$d мин.</string>
+    <string name="planner_minutes_left">Осталось %1$d мин.</string>
+    <string name="planner_priority_title">Приоритет</string>
+    <string name="planner_priority_high">Высокий</string>
+    <string name="planner_priority_medium">Средний</string>
+    <string name="planner_priority_low">Низкий</string>
+    <string name="form_task_new">Новая задача</string>
+    <string name="form_task_edit">Редактировать задачу</string>
+    <string name="form_class_new">Новое занятие</string>
+    <string name="form_class_edit">Редактировать занятие</string>
+    <string name="form_note_new">Новая заметка</string>
+    <string name="form_note_edit">Редактировать заметку</string>
+    <string name="form_goal_title">Ваша недельная учебная цель</string>
+    <string name="form_focus_new">Записать время учёбы</string>
+    <string name="form_focus_edit">Изменить время учёбы</string>
+    <string name="form_task_name">Название задачи</string>
+    <string name="form_subject_optional">Предмет (необязательно)</string>
+    <string name="form_deadline">Дедлайн</string>
+    <string name="form_priority">Приоритет</string>
+    <string name="form_class_name">Название занятия</string>
+    <string name="form_room_optional">Аудитория (необязательно)</string>
+    <string name="form_lecturer_optional">Преподаватель (необязательно)</string>
+    <string name="form_starts">Начало</string>
+    <string name="form_ends">Окончание</string>
+    <string name="form_title">Заголовок</string>
+    <string name="form_note">Заметка</string>
+    <string name="form_study_hours">Часы учёбы за 7 дней (0,5–168)</string>
+    <string name="form_minutes">Минут учёбы (1–1440)</string>
+    <string name="form_date">Дата</string>
+    <string name="form_delete_title">Удалить этот элемент?</string>
+    <string name="form_delete_message">Элемент будет удалён из вашего аккаунта.</string>
+    <string name="form_repeat_title">Повторять каждую неделю</string>
+    <string name="form_repeat_hint">Будут созданы отдельные занятия на следующие 12 недель. Не выбирайте дни для разового занятия.</string>
+    <string-array name="planner_add_options">
+        <item>Задача</item>
+        <item>Занятие</item>
+        <item>Заметка</item>
+        <item>Время учёбы</item>
+        <item>Недельная цель</item>
+    </string-array>
+    <string-array name="planner_sort_options">
+        <item>По дедлайну</item>
+        <item>По приоритету</item>
+        <item>По названию</item>
+    </string-array>
+    <string-array name="planner_study_menu">
+        <item>Запустить / продолжить таймер</item>
+        <item>Записать время вручную</item>
+        <item>Изменить недельную цель</item>
+        <item>История учёбы</item>
+    </string-array>
+    <string-array name="planner_weekday_initials">
+        <item>Пн</item>
+        <item>Вт</item>
+        <item>Ср</item>
+        <item>Чт</item>
+        <item>Пт</item>
+        <item>Сб</item>
+        <item>Вс</item>
+    </string-array>
+    <string-array name="planner_weekday_names">
+        <item>Понедельник</item>
+        <item>Вторник</item>
+        <item>Среда</item>
+        <item>Четверг</item>
+        <item>Пятница</item>
+        <item>Суббота</item>
+        <item>Воскресенье</item>
+    </string-array>
+</resources>

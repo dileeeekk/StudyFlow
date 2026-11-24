@@ -28,6 +28,64 @@ class PlannerViewModel(app: Application) : AndroidViewModel(app) {
         val body = JSONObject().put("kind", kind).put("action", "delete")
         id?.let { body.put("id", it) }; execute(body, operation)
     }
+    fun saveLessons(items: List<JSONObject>, operation: String) {
+        require(items.isNotEmpty())
+
+        val previous = mutable.value ?: PlannerState()
+        if (previous.busy) return
+
+        mutable.value = previous.copy(
+            busy = true,
+            error = null,
+            operation = operation
+        )
+
+        executor.execute {
+            var latest = previous.data
+            var saved = 0
+            var failure: Exception? = null
+
+            try {
+                val repository = AuthRepository.get(getApplication())
+
+                for (lesson in items) {
+                    val body = JSONObject()
+                        .put("kind", "lessons")
+                        .put("action", "save")
+                        .put("data", lesson)
+
+                    latest = repository.planner(body)
+                    saved++
+                }
+            } catch (error: Exception) {
+                failure = error
+            }
+
+            val next = if (failure == null) {
+                PlannerState(
+                    data = latest,
+                    operation = operation
+                )
+            } else {
+                val reason = failure?.message ?: "Unknown server error"
+                val message = if (saved > 0) {
+                    "Saved $saved of ${items.size} lessons. Remaining lessons were not saved: $reason"
+                } else {
+                    reason
+                }
+
+                PlannerState(
+                    data = latest ?: previous.data,
+                    error = message,
+                    expired = (failure as? AuthFailure)?.expired == true,
+                    operation = operation
+                )
+            }
+
+            mutable.postValue(next)
+        }
+    }
+
     private fun execute(body: JSONObject?, operation: String?) {
         val previous = mutable.value ?: PlannerState()
         if (previous.busy) return

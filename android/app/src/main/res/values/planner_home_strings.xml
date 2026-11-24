@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="home_week_history">YOUR LAST 7 DAYS</string>
+    <string name="home_week_tasks">YOUR TASK PROGRESS</string>
+    <string name="home_momentum_great">Great momentum.</string>
+    <string name="home_momentum_keep">Keep it flowing.</string>
+    <string name="home_momentum_fresh">A fresh start.</string>
+    <string name="home_hours_goal">%1$s of %2$s focused hours</string>
+    <string name="home_hours_tasks">%1$d of %2$d tasks completed</string>
+    <string name="home_percent_completed">%1$d percent completed</string>
+    <string name="home_tasks_done_count">%1$d / %2$d tasks done</string>
+    <string name="home_no_deadlines">No deadlines yet</string>
+    <string name="home_add_task_plan">Add a task to plan ahead</string>
+    <string name="home_all_clear">All clear</string>
+    <string name="home_add_task_ready">Add a task when you’re ready.</string>
+    <string name="home_no_classes">No classes today</string>
+    <string name="home_setup_timetable">Set up your timetable to see your classes here.</string>
+    <string name="home_no_upcoming_classes">No upcoming classes</string>
+    <string name="planner_home_up_next_dynamic">Up next · %1$s %2$s · %3$s</string>
+    <string name="collection_tasks">Your tasks</string>
+    <string name="collection_schedule">Your timetable</string>
+    <string name="collection_history">Study history</string>
+    <string name="collection_notes">Your notes</string>
+    <string name="collection_empty">Nothing here yet. Tap + to add your first item.</string>
+    <string name="collection_items">%1$d items · Tap a card to edit</string>
+    <string name="tasks_title_default">Tasks</string>
+    <string name="tasks_title_deadlines">Tasks &amp; deadlines</string>
+    <string name="tasks_subtitle_empty">0 tasks · 0 deadlines</string>
+    <string name="tasks_subtitle_filled">One thing at a time. You’ve got this.</string>
+    <string name="tasks_progress_title">%1$d of %2$d tasks completed · %3$d%%</string>
+    <string name="tasks_progress_detail">%1$d open · %2$d due within 7 days or overdue</string>
+    <string name="tasks_filter_all">All</string>
+    <string name="tasks_filter_soon">Due soon</string>
+    <string name="tasks_filter_done">Completed</string>
+    <string name="tasks_filter_hint">Filters become available after your first task.</string>
+    <string name="tasks_empty_title">Nothing due, enjoy the calm</string>
+    <string name="tasks_empty_detail">Start small. Add one thing you’d like to do, and take it at your own pace.</string>
+    <string name="tasks_add_first">Add your first task</string>
+    <string name="tasks_empty_footer">No deadlines to chase. Just a clear place to begin.</string>
+    <string name="tasks_sort_deadline">By deadline</string>
+    <string name="tasks_sort_priority">By priority</string>
+    <string name="tasks_sort_title">By title</string>
+    <string name="tasks_pending_title">Coming up</string>
+    <string name="tasks_completed_title">Recently completed</string>
+    <string name="tasks_no_soon">No tasks due within the next 7 days.</string>
+    <string name="tasks_no_open">No open tasks.</string>
+    <string name="tasks_no_completed">No completed tasks yet</string>
+    <string name="tasks_check_off">Check off a task when you finish it.</string>
+    <string name="schedule_title">Your schedule</string>
+    <string name="schedule_this_week">This week</string>
+    <string name="schedule_back_week">Back to this week</string>
+    <string name="schedule_add">Add class</string>
+    <string name="schedule_footer">Your timetable grows only when you add to it.</string>
+    <string name="schedule_day_title">%1$s · %2$s</string>
+    <string name="schedule_day_description">%1$s, %2$d classes</string>
+    <string name="schedule_in_progress">● IN PROGRESS</string>
+    <string name="schedule_break">Break · %1$d min</string>
+    <string name="schedule_recharge">Recharge before your next class.</string>
+    <string name="schedule_empty_week">Your week is empty</string>
+    <string name="schedule_empty_day">Your day is free</string>
+    <string name="schedule_empty_detail">Bring your classes together in one place. We’ll help you find the space between.</string>
+    <plurals name="home_streak_count">
+        <item quantity="one">✦ %d-day streak</item>
+        <item quantity="other">✦ %d-day streak</item>
+    </plurals>
+    <plurals name="home_classes_count">
+        <item quantity="one">%d class</item>
+        <item quantity="other">%d classes</item>
+    </plurals>
+    <plurals name="schedule_class_count">
+        <item quantity="one">%d class</item>
+        <item quantity="other">%d classes</item>
+    </plurals>
+    <plurals name="schedule_minutes_remaining">
+        <item quantity="one">%d minute remaining</item>
+        <item quantity="other">%d minutes remaining</item>
+    </plurals>
+    <plurals name="planner_minutes_count">
+        <item quantity="one">%d minute</item>
+        <item quantity="other">%d minutes</item>
+    </plurals>
+</resources>

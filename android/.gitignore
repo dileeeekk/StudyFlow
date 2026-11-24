@@ -13,3 +13,19 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Local configuration and secrets
+local.properties
+.env
+.env.*
+!.env.example
+*.jks
+*.keystore
+keystore.properties
+
+# Build files
+.gradle/
+build/
+*/build/
+.idea/
+*.iml

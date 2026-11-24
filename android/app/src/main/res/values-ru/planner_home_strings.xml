@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="home_week_history">ПОСЛЕДНИЕ 7 ДНЕЙ</string>
+    <string name="home_week_tasks">ВАШ ПРОГРЕСС ПО ЗАДАЧАМ</string>
+    <string name="home_momentum_great">Отличный темп.</string>
+    <string name="home_momentum_keep">Продолжайте в том же духе.</string>
+    <string name="home_momentum_fresh">Новое начало.</string>
+    <string name="home_hours_goal">%1$s из %2$s ч. концентрации</string>
+    <string name="home_hours_tasks">Выполнено задач: %1$d из %2$d</string>
+    <string name="home_percent_completed">Выполнено %1$d процентов</string>
+    <string name="home_tasks_done_count">Задачи: %1$d из %2$d выполнено</string>
+    <string name="home_no_deadlines">Дедлайнов пока нет</string>
+    <string name="home_add_task_plan">Добавьте задачу, чтобы спланировать учёбу</string>
+    <string name="home_all_clear">Всё спокойно</string>
+    <string name="home_add_task_ready">Добавьте задачу, когда будете готовы.</string>
+    <string name="home_no_classes">Сегодня занятий нет</string>
+    <string name="home_setup_timetable">Настройте расписание, чтобы видеть занятия здесь.</string>
+    <string name="home_no_upcoming_classes">Предстоящих занятий нет</string>
+    <string name="planner_home_up_next_dynamic">Далее · %1$s %2$s · %3$s</string>
+    <string name="collection_tasks">Ваши задачи</string>
+    <string name="collection_schedule">Ваше расписание</string>
+    <string name="collection_history">История учёбы</string>
+    <string name="collection_notes">Ваши заметки</string>
+    <string name="collection_empty">Здесь пока пусто. Нажмите +, чтобы добавить первый элемент.</string>
+    <string name="collection_items">Записей: %1$d · Нажмите на карточку для изменения</string>
+    <string name="tasks_title_default">Задачи</string>
+    <string name="tasks_title_deadlines">Задачи и дедлайны</string>
+    <string name="tasks_subtitle_empty">Задач: 0 · Дедлайнов: 0</string>
+    <string name="tasks_subtitle_filled">По одной задаче за раз. У вас всё получится.</string>
+    <string name="tasks_progress_title">Выполнено задач: %1$d из %2$d · %3$d%%</string>
+    <string name="tasks_progress_detail">Открытых: %1$d · Срок в ближайшие 7 дней или уже просрочен: %2$d</string>
+    <string name="tasks_filter_all">Все</string>
+    <string name="tasks_filter_soon">Скоро</string>
+    <string name="tasks_filter_done">Выполнено</string>
+    <string name="tasks_filter_hint">Фильтры станут доступны после добавления первой задачи.</string>
+    <string name="tasks_empty_title">Пока нет срочных дел</string>
+    <string name="tasks_empty_detail">Начните с малого. Добавьте то, что хотите сделать, и двигайтесь в своём темпе.</string>
+    <string name="tasks_add_first">Добавить первую задачу</string>
+    <string name="tasks_empty_footer">Пока нет дедлайнов. Самое время начать.</string>
+    <string name="tasks_sort_deadline">По дедлайну</string>
+    <string name="tasks_sort_priority">По приоритету</string>
+    <string name="tasks_sort_title">По названию</string>
+    <string name="tasks_pending_title">Предстоят</string>
+    <string name="tasks_completed_title">Недавно выполненные</string>
+    <string name="tasks_no_soon">На ближайшие 7 дней задач нет.</string>
+    <string name="tasks_no_open">Нет активных задач.</string>
+    <string name="tasks_no_completed">Пока нет выполненных задач</string>
+    <string name="tasks_check_off">Отметьте задачу после её выполнения.</string>
+    <string name="schedule_title">Ваше расписание</string>
+    <string name="schedule_this_week">Эта неделя</string>
+    <string name="schedule_back_week">Вернуться к этой неделе</string>
+    <string name="schedule_add">Добавить занятие</string>
+    <string name="schedule_footer">Ваше расписание будет пополняться по мере добавления занятий.</string>
+    <string name="schedule_day_title">%1$s · %2$s</string>
+    <string name="schedule_day_description">%1$s, занятий: %2$d</string>
+    <string name="schedule_in_progress">● ИДЁТ СЕЙЧАС</string>
+    <string name="schedule_break">Перерыв · %1$d мин.</string>
+    <string name="schedule_recharge">Отдохните перед следующим занятием.</string>
+    <string name="schedule_empty_week">На этой неделе занятий нет</string>
+    <string name="schedule_empty_day">На сегодня занятий нет</string>
+    <string name="schedule_empty_detail">Соберите все занятия в одном месте и планируйте свободное время между ними.</string>
+    <plurals name="home_streak_count">
+        <item quantity="one">✦ %d день подряд</item>
+        <item quantity="few">✦ %d дня подряд</item>
+        <item quantity="many">✦ %d дней подряд</item>
+        <item quantity="other">✦ %d дня подряд</item>
+    </plurals>
+    <plurals name="home_classes_count">
+        <item quantity="one">%d занятие</item>
+        <item quantity="few">%d занятия</item>
+        <item quantity="many">%d занятий</item>
+        <item quantity="other">%d занятия</item>
+    </plurals>
+    <plurals name="schedule_class_count">
+        <item quantity="one">%d занятие</item>
+        <item quantity="few">%d занятия</item>
+        <item quantity="many">%d занятий</item>
+        <item quantity="other">%d занятия</item>
+    </plurals>
+    <plurals name="schedule_minutes_remaining">
+        <item quantity="one">Осталась %d минута</item>
+        <item quantity="few">Осталось %d минуты</item>
+        <item quantity="many">Осталось %d минут</item>
+        <item quantity="other">Осталось %d минуты</item>
+    </plurals>
+    <plurals name="planner_minutes_count">
+        <item quantity="one">%d минута</item>
+        <item quantity="few">%d минуты</item>
+        <item quantity="many">%d минут</item>
+        <item quantity="other">%d минуты</item>
+    </plurals>
+</resources>

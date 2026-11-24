@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="home_week_history">СОҢҒЫ 7 КҮН</string>
+    <string name="home_week_tasks">ТАПСЫРМАЛАР ПРОГРЕСІ</string>
+    <string name="home_momentum_great">Керемет қарқын.</string>
+    <string name="home_momentum_keep">Осы қарқынды жалғастырыңыз.</string>
+    <string name="home_momentum_fresh">Жаңа бастама.</string>
+    <string name="home_hours_goal">%1$s / %2$s сағат зейінмен оқу</string>
+    <string name="home_hours_tasks">Орындалған тапсырмалар: %1$d / %2$d</string>
+    <string name="home_percent_completed">%1$d пайыз орындалды</string>
+    <string name="home_tasks_done_count">Тапсырмалар: %1$d / %2$d орындалды</string>
+    <string name="home_no_deadlines">Әзірге мерзімдер жоқ</string>
+    <string name="home_add_task_plan">Оқуды жоспарлау үшін тапсырма қосыңыз</string>
+    <string name="home_all_clear">Барлығы реттелген</string>
+    <string name="home_add_task_ready">Дайын болғанда тапсырма қосыңыз.</string>
+    <string name="home_no_classes">Бүгін сабақ жоқ</string>
+    <string name="home_setup_timetable">Сабақтарыңызды көру үшін кестені баптаңыз.</string>
+    <string name="home_no_upcoming_classes">Алдағы сабақтар жоқ</string>
+    <string name="planner_home_up_next_dynamic">Келесі · %1$s %2$s · %3$s</string>
+    <string name="collection_tasks">Тапсырмаларыңыз</string>
+    <string name="collection_schedule">Сабақ кестеңіз</string>
+    <string name="collection_history">Оқу тарихы</string>
+    <string name="collection_notes">Жазбаларыңыз</string>
+    <string name="collection_empty">Әзірге бос. Бірінші элементті қосу үшін + басыңыз.</string>
+    <string name="collection_items">Жазбалар: %1$d · Өзгерту үшін карточканы басыңыз</string>
+    <string name="tasks_title_default">Тапсырмалар</string>
+    <string name="tasks_title_deadlines">Тапсырмалар мен мерзімдер</string>
+    <string name="tasks_subtitle_empty">Тапсырмалар: 0 · Мерзімдер: 0</string>
+    <string name="tasks_subtitle_filled">Бір тапсырмадан бастаңыз. Сізде бәрі ойдағыдай болады.</string>
+    <string name="tasks_progress_title">Орындалғаны: %1$d / %2$d тапсырма · %3$d%%</string>
+    <string name="tasks_progress_detail">Ашық тапсырмалар: %1$d · 7 күн ішіндегі немесе мерзімі өткен: %2$d</string>
+    <string name="tasks_filter_all">Барлығы</string>
+    <string name="tasks_filter_soon">Жақында</string>
+    <string name="tasks_filter_done">Орындалды</string>
+    <string name="tasks_filter_hint">Сүзгілер алғашқы тапсырманы қосқаннан кейін қолжетімді болады.</string>
+    <string name="tasks_empty_title">Әзірге шұғыл тапсырма жоқ</string>
+    <string name="tasks_empty_detail">Кішкентай қадамнан бастаңыз. Орындағыңыз келген істі қосып, өз қарқыныңызбен жүріңіз.</string>
+    <string name="tasks_add_first">Алғашқы тапсырманы қосу</string>
+    <string name="tasks_empty_footer">Әзірге мерзімдер жоқ. Бастауға жақсы мүмкіндік.</string>
+    <string name="tasks_sort_deadline">Мерзімі бойынша</string>
+    <string name="tasks_sort_priority">Басымдығы бойынша</string>
+    <string name="tasks_sort_title">Атауы бойынша</string>
+    <string name="tasks_pending_title">Алда</string>
+    <string name="tasks_completed_title">Жақында орындалған</string>
+    <string name="tasks_no_soon">Алдағы 7 күнде тапсырмалар жоқ.</string>
+    <string name="tasks_no_open">Белсенді тапсырмалар жоқ.</string>
+    <string name="tasks_no_completed">Әзірге орындалған тапсырмалар жоқ</string>
+    <string name="tasks_check_off">Тапсырманы аяқтаған соң белгілеңіз.</string>
+    <string name="schedule_title">Сабақ кестеңіз</string>
+    <string name="schedule_this_week">Осы апта</string>
+    <string name="schedule_back_week">Осы аптаға оралу</string>
+    <string name="schedule_add">Сабақ қосу</string>
+    <string name="schedule_footer">Сабақ қосқан сайын кестеңіз толығады.</string>
+    <string name="schedule_day_title">%1$s · %2$s</string>
+    <string name="schedule_day_description">%1$s, сабақ саны: %2$d</string>
+    <string name="schedule_in_progress">● ҚАЗІР ӨТІП ЖАТЫР</string>
+    <string name="schedule_break">Үзіліс · %1$d мин.</string>
+    <string name="schedule_recharge">Келесі сабаққа дейін демалыңыз.</string>
+    <string name="schedule_empty_week">Бұл аптада сабақ жоқ</string>
+    <string name="schedule_empty_day">Бүгін сабақ жоқ</string>
+    <string name="schedule_empty_detail">Барлық сабақтарыңызды бір жерге жинап, олардың арасындағы бос уақытты жоспарлаңыз.</string>
+    <plurals name="home_streak_count">
+        <item quantity="other">✦ %d күн қатарынан</item>
+    </plurals>
+    <plurals name="home_classes_count">
+        <item quantity="other">%d сабақ</item>
+    </plurals>
+    <plurals name="schedule_class_count">
+        <item quantity="other">%d сабақ</item>
+    </plurals>
+    <plurals name="schedule_minutes_remaining">
+        <item quantity="other">%d минут қалды</item>
+    </plurals>
+    <plurals name="planner_minutes_count">
+        <item quantity="other">%d минут</item>
+    </plurals>
+</resources>

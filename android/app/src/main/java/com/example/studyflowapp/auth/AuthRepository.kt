@@ -2,11 +2,11 @@ package com.example.studyflowapp.auth
 
 import android.content.Context
 import com.example.studyflowapp.BuildConfig
+import com.google.gson.JsonParser
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
 import java.io.InterruptedIOException
-import java.net.HttpURLConnection
 import java.net.URI
 import java.util.Locale
 
@@ -21,6 +21,10 @@ class AuthFailure(message: String, val status: Int = 0, val expired: Boolean = f
 
 class AuthRepository private constructor(context: Context) {
     private val store = TokenStore(context.applicationContext)
+
+    private val api by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
+        StudyFlowApiFactory.create(BuildConfig.API_BASE_URL)
+    }
 
     // One lock serializes refresh rotation, logout and new login across all screens.
     @Synchronized fun hasSession(): Boolean = store.read() != null
@@ -99,40 +103,44 @@ class AuthRepository private constructor(context: Context) {
     }
 
     private fun request(path: String, body: JSONObject? = null, access: String? = null): JSONObject {
-        val base = try { URI(BuildConfig.API_BASE_URL) } catch (_: Exception) { throw AuthFailure("API address is not configured.") }
-        val localDebug = BuildConfig.DEBUG && base.host in setOf("10.0.2.2", "127.0.0.1", "localhost")
-        if ((base.scheme != "https" && !(localDebug && base.scheme == "http")) || base.host.isNullOrBlank() ||
-            base.userInfo != null || base.query != null || base.fragment != null || !base.path.endsWith("/")) {
+        val base = try {
+            URI(BuildConfig.API_BASE_URL)
+        } catch (_: Exception) {
+            throw AuthFailure("API address is not configured.")
+        }
+
+        val localDebug = BuildConfig.DEBUG &&
+            base.host in setOf("10.0.2.2", "127.0.0.1", "localhost")
+
+        if ((base.scheme != "https" && !(localDebug && base.scheme == "http")) ||
+            base.host.isNullOrBlank() || base.userInfo != null ||
+            base.query != null || base.fragment != null || !base.path.endsWith("/")) {
             throw AuthFailure("Configure a valid HTTPS API address for this build.")
         }
-        val connection = base.resolve(path).toURL().openConnection() as HttpURLConnection
+
         try {
-            connection.requestMethod = if (body == null) "GET" else "POST"
-            connection.instanceFollowRedirects = false // Never forward credentials to another URL.
-            connection.connectTimeout = 15000
-            connection.readTimeout = 15000
-            connection.useCaches = false
-            connection.setRequestProperty("Accept", "application/json")
-            if (access != null) connection.setRequestProperty("Authorization", "Bearer $access")
-            if (body != null) {
-                val bytes = body.toString().toByteArray(Charsets.UTF_8)
-                connection.doOutput = true
-                connection.setRequestProperty("Content-Type", "application/json; charset=utf-8")
-                connection.setFixedLengthStreamingMode(bytes.size)
-                connection.outputStream.use { it.write(bytes) }
+            val authorization = access?.let { "Bearer $it" }
+
+            val response = if (body == null) {
+                api.get(path, authorization).execute()
+            } else {
+                val payload = JsonParser.parseString(body.toString()).asJsonObject
+                api.post(path, authorization, payload).execute()
             }
-            val status = connection.responseCode
-            val stream = if (status in 200..299) connection.inputStream else connection.errorStream
-            val text = stream?.bufferedReader(Charsets.UTF_8)?.use { reader ->
-                val result = StringBuilder(); val buffer = CharArray(4096)
-                while (true) {
-                    val count = reader.read(buffer); if (count < 0) break
-                    result.append(buffer, 0, count)
-                    if (result.length > 262144) throw AuthFailure("The server response is too large.")
+
+            val status = response.code()
+
+            val json = if (response.isSuccessful) {
+                response.body()?.let { JSONObject(it.toString()) } ?: JSONObject()
+            } else {
+                val errorText = response.errorBody()?.string().orEmpty()
+                try {
+                    JSONObject(errorText.ifBlank { "{}" })
+                } catch (_: Exception) {
+                    JSONObject()
                 }
-                result.toString()
-            }.orEmpty()
-            val json = try { JSONObject(text.ifBlank { "{}" }) } catch (_: Exception) { JSONObject() }
+            }
+
             if (status !in 200..299) {
                 val message = when {
                     status == 429 -> "Too many attempts. Please wait a minute and try again."
@@ -142,12 +150,13 @@ class AuthRepository private constructor(context: Context) {
                 }
                 throw AuthFailure(message, status)
             }
+
             return json
         } catch (error: IOException) {
             throw AuthFailure("Cannot reach the server. Check your connection and try again.")
         } catch (_: SecurityException) {
             throw AuthFailure("Network access is not allowed. Check the app permissions.")
-        } finally { connection.disconnect() }
+        }
     }
 
     private fun errorMessage(json: JSONObject): String {

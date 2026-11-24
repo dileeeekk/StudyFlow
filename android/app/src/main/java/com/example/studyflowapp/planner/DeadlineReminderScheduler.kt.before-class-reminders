@@ -1,0 +1,211 @@
+package com.example.studyflowapp.planner
+
+import android.Manifest
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
+import androidx.work.Data
+import androidx.work.ExistingWorkPolicy
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.Worker
+import androidx.work.WorkerParameters
+import com.example.studyflowapp.MainActivity
+import com.example.studyflowapp.R
+import org.json.JSONObject
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import java.util.concurrent.TimeUnit
+
+object DeadlineReminderScheduler {
+    private const val PREFS = "studyflow_deadline_schedule"
+    private const val SNAPSHOT = "scheduled_snapshot"
+    private const val WORK_TAG = "studyflow_deadline_reminder"
+    private const val WORK_PREFIX = "studyflow_deadline_"
+    private const val CHANNEL_ID = "studyflow_deadlines"
+
+    fun sync(context: Context, snapshot: JSONObject): Boolean {
+        createChannel(context)
+
+        val tasks = snapshot.optJSONArray("tasks")
+        val now = System.currentTimeMillis()
+        val current = JSONObject()
+
+        if (tasks != null) {
+            for (i in 0 until tasks.length()) {
+                val task = tasks.optJSONObject(i) ?: continue
+                if (task.optBoolean("completed")) continue
+
+                val id = task.optLong("id", -1L)
+                val title = task.optString("title").trim()
+                val dueAt = parseDate(task.optString("due_at"))
+
+                if (id <= 0L || title.isBlank() || dueAt == null || dueAt <= now) {
+                    continue
+                }
+
+                val fingerprint = "$dueAt:${title.hashCode()}"
+                current.put(id.toString(), fingerprint)
+            }
+        }
+
+        val prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+        val previous = try {
+            JSONObject(prefs.getString(SNAPSHOT, "{}") ?: "{}")
+        } catch (_: Exception) {
+            JSONObject()
+        }
+
+        val manager = WorkManager.getInstance(context)
+
+        val oldIds = previous.keys()
+        while (oldIds.hasNext()) {
+            val id = oldIds.next()
+            if (!current.has(id)) {
+                manager.cancelUniqueWork(WORK_PREFIX + id)
+            }
+        }
+
+        val ids = current.keys()
+        while (ids.hasNext()) {
+            val id = ids.next()
+            val fingerprint = current.optString(id)
+
+            if (previous.optString(id) == fingerprint) continue
+
+            val task = (0 until (tasks?.length() ?: 0))
+                .asSequence()
+                .mapNotNull { tasks?.optJSONObject(it) }
+                .firstOrNull { it.optLong("id") .toString() == id }
+                ?: continue
+
+            val dueAt = parseDate(task.optString("due_at")) ?: continue
+            val title = task.optString("title").take(120)
+
+            val delay = (dueAt - TimeUnit.MINUTES.toMillis(30) - now)
+                .coerceAtLeast(0L)
+
+            val input = Data.Builder()
+                .putLong("task_id", id.toLong())
+                .putLong("due_at", dueAt)
+                .putString("task_title", title)
+                .build()
+
+            val request = OneTimeWorkRequestBuilder<DeadlineReminderWorker>()
+                .setInputData(input)
+                .setInitialDelay(delay, TimeUnit.MILLISECONDS)
+                .addTag(WORK_TAG)
+                .build()
+
+            manager.enqueueUniqueWork(
+                WORK_PREFIX + id,
+                ExistingWorkPolicy.REPLACE,
+                request
+            )
+        }
+
+        prefs.edit().putString(SNAPSHOT, current.toString()).apply()
+        return current.length() > 0
+    }
+
+    private fun parseDate(value: String): Long? =
+        PlannerUi.timestamp(value)
+
+    private fun createChannel(context: Context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                CHANNEL_ID,
+                "Deadline reminders",
+                NotificationManager.IMPORTANCE_DEFAULT
+            ).apply {
+                description = "Reminders about upcoming StudyFlow tasks"
+            }
+
+            context.getSystemService(NotificationManager::class.java)
+                .createNotificationChannel(channel)
+        }
+    }
+
+    internal fun channelId() = CHANNEL_ID
+}
+
+class DeadlineReminderWorker(
+    context: Context,
+    params: WorkerParameters
+) : Worker(context, params) {
+
+    override fun doWork(): Result {
+        val context = applicationContext
+        val taskId = inputData.getLong("task_id", -1L)
+        val dueAt = inputData.getLong("due_at", -1L)
+        val title = inputData.getString("task_title").orEmpty()
+
+        if (taskId <= 0L || dueAt <= 0L || title.isBlank()) {
+            return Result.failure()
+        }
+
+        if (!NotificationManagerCompat.from(context).areNotificationsEnabled()) {
+            return Result.success()
+        }
+
+        if (Build.VERSION.SDK_INT >= 33 &&
+            ContextCompat.checkSelfPermission(
+                context, Manifest.permission.POST_NOTIFICATIONS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return Result.success()
+        }
+
+        val dueText = SimpleDateFormat(
+            "EEE, d MMM · HH:mm", Locale.getDefault()
+        ).format(Date(dueAt))
+
+        val heading = if (System.currentTimeMillis() < dueAt) {
+            "Upcoming deadline"
+        } else {
+            "Deadline time"
+        }
+
+        val intent = Intent(context, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+        }
+
+        val pendingIntent = PendingIntent.getActivity(
+            context,
+            taskId.hashCode(),
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        val notification = NotificationCompat.Builder(
+            context, DeadlineReminderScheduler.channelId()
+        )
+            .setSmallIcon(android.R.drawable.ic_dialog_info)
+            .setContentTitle(heading)
+            .setContentText("$title · Due $dueText")
+            .setStyle(
+                NotificationCompat.BigTextStyle()
+                    .bigText("$title\nDue $dueText")
+            )
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .build()
+
+        return try {
+            NotificationManagerCompat.from(context)
+                .notify(taskId.hashCode(), notification)
+            Result.success()
+        } catch (_: SecurityException) {
+            Result.success()
+        }
+    }
+}

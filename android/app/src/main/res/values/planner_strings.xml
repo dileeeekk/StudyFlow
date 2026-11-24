@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="planner_add_title">Add to StudyFlow</string>
+    <string name="planner_sort_title">Sort tasks</string>
+    <string name="planner_syncing">Syncing your planner…</string>
+    <string name="planner_stale_data_suffix">Your last loaded data is still shown.</string>
+    <string name="planner_completed">Completed</string>
+    <string name="planner_done_prefix">Done %1$s</string>
+    <string name="planner_task_complete_accessibility">Mark %1$s as completed</string>
+    <string name="planner_progress_title">Your study progress</string>
+    <string name="planner_timer_title">Study timer</string>
+    <string name="planner_start">Start</string>
+    <string name="planner_pause">Pause</string>
+    <string name="planner_running">Your study session is running.</string>
+    <string name="planner_paused">Paused. Press Start to continue.</string>
+    <string name="planner_finish_save">Finish &amp; save</string>
+    <string name="planner_min_duration">Study for at least one minute before saving.</string>
+    <string name="planner_saving">Saving your study session…</string>
+    <string name="planner_minutes_saved">%1$d minutes saved!</string>
+    <string name="planner_save_error">Could not save: %1$s</string>
+    <string name="planner_deadlines_title">Upcoming deadlines</string>
+    <string name="planner_no_deadlines">You have no pending deadlines.</string>
+    <string name="planner_overdue">Overdue</string>
+    <string name="planner_days_hours">%1$d days %2$d hours left</string>
+    <string name="planner_hours_minutes">%1$d hours %2$d minutes left</string>
+    <string name="planner_minutes_left">%1$d minutes left</string>
+    <string name="planner_priority_title">Priority</string>
+    <string name="planner_priority_high">High</string>
+    <string name="planner_priority_medium">Medium</string>
+    <string name="planner_priority_low">Low</string>
+    <string name="form_task_new">New task</string>
+    <string name="form_task_edit">Edit task</string>
+    <string name="form_class_new">New class</string>
+    <string name="form_class_edit">Edit class</string>
+    <string name="form_note_new">New note</string>
+    <string name="form_note_edit">Edit note</string>
+    <string name="form_goal_title">Your weekly study goal</string>
+    <string name="form_focus_new">Log study time</string>
+    <string name="form_focus_edit">Edit study time</string>
+    <string name="form_task_name">Task name</string>
+    <string name="form_subject_optional">Subject (optional)</string>
+    <string name="form_deadline">Deadline</string>
+    <string name="form_priority">Priority</string>
+    <string name="form_class_name">Class name</string>
+    <string name="form_room_optional">Room (optional)</string>
+    <string name="form_lecturer_optional">Lecturer (optional)</string>
+    <string name="form_starts">Starts</string>
+    <string name="form_ends">Ends</string>
+    <string name="form_title">Title</string>
+    <string name="form_note">Note</string>
+    <string name="form_study_hours">Study hours in 7 days (0.5–168)</string>
+    <string name="form_minutes">Minutes studied (1–1440)</string>
+    <string name="form_date">Date</string>
+    <string name="form_delete_title">Delete this item?</string>
+    <string name="form_delete_message">This will remove it from your account.</string>
+    <string name="form_repeat_title">Repeat weekly on</string>
+    <string name="form_repeat_hint">Creates separate weekly classes for the next 12 weeks. Leave all days unchecked for a one-time class.</string>
+    <string-array name="planner_add_options">
+        <item>Task</item>
+        <item>Class</item>
+        <item>Note</item>
+        <item>Study time</item>
+        <item>Weekly goal</item>
+    </string-array>
+    <string-array name="planner_sort_options">
+        <item>By deadline</item>
+        <item>By priority</item>
+        <item>By title</item>
+    </string-array>
+    <string-array name="planner_study_menu">
+        <item>Start / resume study timer</item>
+        <item>Log study time manually</item>
+        <item>Edit weekly goal</item>
+        <item>Study history</item>
+    </string-array>
+    <string-array name="planner_weekday_initials">
+        <item>Mo</item>
+        <item>Tu</item>
+        <item>We</item>
+        <item>Th</item>
+        <item>Fr</item>
+        <item>Sa</item>
+        <item>Su</item>
+    </string-array>
+    <string-array name="planner_weekday_names">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
+</resources>

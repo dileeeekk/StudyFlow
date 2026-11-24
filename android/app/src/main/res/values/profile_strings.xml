@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="common_cancel">Cancel</string>
+    <string name="common_save">Save</string>
+    <string name="common_delete">Delete</string>
+    <string name="common_close">Close</string>
+    <string name="profile_back">‹   Back</string>
+    <string name="profile_title">Your profile</string>
+    <string name="profile_subtitle">Your StudyFlow account</string>
+    <string name="profile_loading">Loading profile…</string>
+    <string name="profile_account_details">ACCOUNT DETAILS</string>
+    <string name="profile_university">University</string>
+    <string name="profile_loading_value">Loading…</string>
+    <string name="profile_account_type">Account type</string>
+    <string name="profile_student_account">Student account</string>
+    <string name="profile_account_status">ACCOUNT STATUS</string>
+    <string name="profile_connected">Connected to StudyFlow</string>
+    <string name="profile_connected_description">Your profile is loaded from your StudyFlow account. Planner data is synchronized with the server.</string>
+    <string name="profile_loading_account">Loading your account…</string>
+    <string name="profile_retry">Try again</string>
+    <string name="profile_refreshing">Refreshing profile…</string>
+    <string name="profile_sign_out">Sign out</string>
+    <string name="profile_signing_out">Signing out…</string>
+    <string name="profile_up_to_date">Your account details are up to date.</string>
+    <string name="profile_footer">StudyFlow · Student planner</string>
+    <string name="profile_language_section">LANGUAGE</string>
+    <string name="profile_language_title">App language</string>
+    <string name="profile_language_description">Choose the language used throughout StudyFlow</string>
+    <string name="language_russian">Русский</string>
+    <string name="language_kazakh">Қазақша</string>
+    <string name="language_english">English</string>
+    <string name="notification_disabled">Notifications are disabled. You can enable them in app settings.</string>
+    <string name="reminder_title">Deadline reminders</string>
+    <string name="reminder_message">Allow StudyFlow to notify you about upcoming task deadlines. Reminders are scheduled about 30 minutes before a task is due.</string>
+    <string name="reminder_not_now">Not now</string>
+    <string name="reminder_enable">Enable reminders</string>
+</resources>

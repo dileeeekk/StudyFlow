@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="planner_add_title">StudyFlow ішіне қосу</string>
+    <string name="planner_sort_title">Тапсырмаларды сұрыптау</string>
+    <string name="planner_syncing">Жоспарлағыш синхрондалып жатыр…</string>
+    <string name="planner_stale_data_suffix">Соңғы жүктелген деректер көрсетіліп тұр.</string>
+    <string name="planner_completed">Орындалды</string>
+    <string name="planner_done_prefix">Орындалды: %1$s</string>
+    <string name="planner_task_complete_accessibility">%1$s тапсырмасын орындалды деп белгілеу</string>
+    <string name="planner_progress_title">Оқу үлгеріміңіз</string>
+    <string name="planner_timer_title">Оқу таймері</string>
+    <string name="planner_start">Бастау</string>
+    <string name="planner_pause">Кідірту</string>
+    <string name="planner_running">Оқу сессиясы жүріп жатыр.</string>
+    <string name="planner_paused">Кідіртілді. Жалғастыру үшін «Бастау» түймесін басыңыз.</string>
+    <string name="planner_finish_save">Аяқтау және сақтау</string>
+    <string name="planner_min_duration">Сақтау үшін кемінде бір минут оқу керек.</string>
+    <string name="planner_saving">Оқу сессиясы сақталуда…</string>
+    <string name="planner_minutes_saved">%1$d минут сақталды!</string>
+    <string name="planner_save_error">Сақтау мүмкін болмады: %1$s</string>
+    <string name="planner_deadlines_title">Жақында болатын мерзімдер</string>
+    <string name="planner_no_deadlines">Алдағы мерзімдер жоқ.</string>
+    <string name="planner_overdue">Мерзімі өтіп кеткен</string>
+    <string name="planner_days_hours">%1$d күн %2$d сағат қалды</string>
+    <string name="planner_hours_minutes">%1$d сағат %2$d минут қалды</string>
+    <string name="planner_minutes_left">%1$d минут қалды</string>
+    <string name="planner_priority_title">Басымдық</string>
+    <string name="planner_priority_high">Жоғары</string>
+    <string name="planner_priority_medium">Орташа</string>
+    <string name="planner_priority_low">Төмен</string>
+    <string name="form_task_new">Жаңа тапсырма</string>
+    <string name="form_task_edit">Тапсырманы өңдеу</string>
+    <string name="form_class_new">Жаңа сабақ</string>
+    <string name="form_class_edit">Сабақты өңдеу</string>
+    <string name="form_note_new">Жаңа жазба</string>
+    <string name="form_note_edit">Жазбаны өңдеу</string>
+    <string name="form_goal_title">Апталық оқу мақсатыңыз</string>
+    <string name="form_focus_new">Оқу уақытын жазу</string>
+    <string name="form_focus_edit">Оқу уақытын өзгерту</string>
+    <string name="form_task_name">Тапсырма атауы</string>
+    <string name="form_subject_optional">Пән (міндетті емес)</string>
+    <string name="form_deadline">Соңғы мерзім</string>
+    <string name="form_priority">Басымдық</string>
+    <string name="form_class_name">Сабақ атауы</string>
+    <string name="form_room_optional">Аудитория (міндетті емес)</string>
+    <string name="form_lecturer_optional">Оқытушы (міндетті емес)</string>
+    <string name="form_starts">Басталуы</string>
+    <string name="form_ends">Аяқталуы</string>
+    <string name="form_title">Тақырып</string>
+    <string name="form_note">Жазба</string>
+    <string name="form_study_hours">7 күндегі оқу сағаты (0,5–168)</string>
+    <string name="form_minutes">Оқу минуттары (1–1440)</string>
+    <string name="form_date">Күні</string>
+    <string name="form_delete_title">Бұл элемент жойылсын ба?</string>
+    <string name="form_delete_message">Бұл элемент аккаунтыңыздан жойылады.</string>
+    <string name="form_repeat_title">Апта сайын қайталау</string>
+    <string name="form_repeat_hint">Келесі 12 аптаға жеке сабақтар жасалады. Бір реттік сабақ үшін күндерді белгілемеңіз.</string>
+    <string-array name="planner_add_options">
+        <item>Тапсырма</item>
+        <item>Сабақ</item>
+        <item>Жазба</item>
+        <item>Оқу уақыты</item>
+        <item>Апталық мақсат</item>
+    </string-array>
+    <string-array name="planner_sort_options">
+        <item>Мерзімі бойынша</item>
+        <item>Басымдығы бойынша</item>
+        <item>Атауы бойынша</item>
+    </string-array>
+    <string-array name="planner_study_menu">
+        <item>Таймерді бастау / жалғастыру</item>
+        <item>Оқу уақытын қолмен енгізу</item>
+        <item>Апталық мақсатты өзгерту</item>
+        <item>Оқу тарихы</item>
+    </string-array>
+    <string-array name="planner_weekday_initials">
+        <item>Дс</item>
+        <item>Сс</item>
+        <item>Ср</item>
+        <item>Бс</item>
+        <item>Жм</item>
+        <item>Сн</item>
+        <item>Жс</item>
+    </string-array>
+    <string-array name="planner_weekday_names">
+        <item>Дүйсенбі</item>
+        <item>Сейсенбі</item>
+        <item>Сәрсенбі</item>
+        <item>Бейсенбі</item>
+        <item>Жұма</item>
+        <item>Сенбі</item>
+        <item>Жексенбі</item>
+    </string-array>
+</resources>
